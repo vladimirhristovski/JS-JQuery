@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #ui-datepicker-div{
+            /*width: 500px;*/
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#date").datepicker({
+                appendText: "d MM YY",
+                changeMonth: true,
+                changeYear: true,
+                duration:"slow",
+                showAnim: "fold",
+                // dateFormat: "DD MM yy",
+                firstDay: 0,
+                monthNames:["Јануари","Фебруари","Март","Април","Мај","Јуни","Јули","Август","Септември","Октомври","Ноември","Декември"],
+                monthNamesShort:["Јан","Феб","Мар","Апр","Мај","Јун","Јул","Авг","Септ","Окто","Ноември","Декемвр"],
+                dayNames:["Понеделник","Вторник","Среда","Четврток","Петок","Сабота","Недела"],
+                dayNamesMin:["Пон","Вто","Сре","Чет","Пет","Саб","Нед"],
+                nextText: "Следен",
+                prevText: "Претходен",
+                numberOfMonths: 2,
+                stepMonths: 2,
+                defaultDate: "04/04/2022"
+            });
+        })
+    </script>
+</head>
+<body>
+<label>Enter a date: </label><input id="date"><br/>
+</body>
+</html>

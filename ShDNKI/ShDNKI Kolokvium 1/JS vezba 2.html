@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>My First Web Page</h1>
+<p id="demo">My First Paragraph</p>
+<script>
+  document.getElementById("demo").innerHTML="Paragraph changed.";
+  a=5;
+  b=6;
+  c=a+b;
+  console.log(c);
+  //alert("Input field is empty.");
+  //confirm("Do you want to quit?");
+  //prompt("enter your age:","Enter age here . . .");
+  d="5";
+  if(a==d) {
+    console.log(true);
+  }
+  else {
+    console.log(false);
+  }
+  if(a===d) {
+    console.log(true);
+  }
+  else {
+    console.log(false);
+  }
+  console.log(a+d);
+  console.log(a+parseInt(d));
+  var person={fname:"John",lname:"Doe",age:25};
+  var text="";
+  var x;
+  for(x in person){
+    text+=person[x];
+  }
+  console.log(text);
+</script>
+</body>
+</html>

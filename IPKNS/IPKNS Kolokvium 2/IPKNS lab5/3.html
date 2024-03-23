@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z3</title>
+    <style>
+        img {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+        }
+
+        .default {
+            background: url("images/default.png") no-repeat;
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+        }
+
+        .hit {
+
+        }
+
+        .selected {
+
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var chosen = 0
+            var element1
+            var element2
+            var parent1
+            var parent2
+            var pogodoci = 0
+            var images = document.getElementsByTagName('img');
+            for (i = 0; i < images.length; i++) {
+                images[i].style.display = "none";
+            }
+
+            var td = document.getElementsByTagName('td');
+            for (i = 0; i < td.length; i++) {
+                td[i].classList.add("default")
+            }
+
+            var defaults = document.getElementsByClassName('default');
+            for (i = 0; i < defaults.length; i++) {
+                defaults[i].addEventListener("click", choose);
+            }
+
+            let reset = document.querySelector('input[value="RESET"]')
+            reset.onclick = function () {
+                location.reload()
+            }
+
+            function choose() {
+                if (pogodoci === 9) {
+                    return
+                }
+                if (this.classList.contains("hit") || this.classList.contains("selected")) {
+                    return;
+                }
+                chosen++
+                if (chosen % 4 === 3) {
+                    for (i = 0; i < td.length; i++) {
+                        if (td[i].classList.contains("default")) {
+                            images[i].style.display = "none";
+                        }
+                    }
+                    chosen=0
+                    return;
+                }
+
+                if (chosen % 4 === 1) {
+                    if(parent1===undefined||parent1===null) {
+                        parent1 = this
+                        element1 = this.children[0].src
+                        parent1.classList.add("selected")
+                        parent1.classList.remove("default");
+                    }else {
+                        chosen++
+                    }
+                }
+                console.log(chosen)
+
+
+                if (chosen % 4 === 2) {
+                    parent2 = this
+                    element2 = this.children[0].src
+                    console.log(parent1)
+                    console.log(parent2)
+                    parent2.classList.remove("default");
+                    parent2.classList.add("selected")
+                    if (element1 === element2) {
+                        parent1.classList.remove("selected");
+                        parent1.classList.remove("default");
+                        parent1.classList.add("hit")
+                        parent2.classList.remove("selected");
+                        parent2.classList.remove("default");
+                        parent2.classList.add("hit")
+                        choose = 0
+                        pogodoci++
+                        parent1=null
+                        parent2=null
+                        element1=null
+                        element2=null
+                    } else {
+                        parent1.classList.remove("selected");
+                        parent1.classList.add("default")
+                        parent1=parent2
+                        element1=element2
+                        parent2=null
+                        element2=null
+                    }
+                }
+                this.children[0].style.display = "";
+                if (pogodoci === 8) {
+                    alert("Congratulations, you won!")
+                    pogodoci++
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Meморија</h1>
+<div style="text-align:left; float:left">
+    <table border="1">
+        <tr>
+            <td id="11"><img src="images/1.png"/></td>
+            <td id="12"><img src="images/2.png"/></td>
+            <td id="13"><img src="images/2.png"/></td>
+            <td id="14"><img src="images/3.png"/></td>
+        </tr>
+        <tr>
+            <td id="21"><img src="images/4.png"/></td>
+            <td id="22"><img src="images/5.png"/></td>
+            <td id="23"><img src="images/1.png"/></td>
+            <td id="24"><img src="images/5.png"/></td>
+        </tr>
+        <tr>
+            <td id="31"><img src="images/6.png"/></td>
+            <td id="32"><img src="images/4.png"/></td>
+            <td id="33"><img src="images/7.png"/></td>
+            <td id="34"><img src="images/8.png"/></td>
+        </tr>
+        <tr>
+            <td id="41"><img src="images/3.png"/></td>
+            <td id="42"><img src="images/7.png"/></td>
+            <td id="43"><img src="images/8.png"/></td>
+            <td id="44"><img src="images/6.png"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="RESET"/>
+</div>
+<br/>
+</body>
+</html>

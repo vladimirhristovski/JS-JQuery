@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L3Z2</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        .element{
+            display: inline-block;
+            width: 180px;
+            height: 200px;
+            border: 1px solid black;
+            vertical-align: top;
+            text-align: center;
+            margin: 10px;
+        }
+        .element ul{
+            list-style: none;
+            padding:0;
+        }
+        .element li{
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+        .hover{
+            color: red;
+        }
+        .active{
+            color: green;
+        }
+        #text{
+            color: green;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#selected").hide()
+
+            $(".element li").hover(function (){
+                $(this).addClass("hover")
+            }, function () {
+                $(this).removeClass("hover")
+            })
+
+            $(".element li").click(function () {
+                $(".element li").removeClass("active")
+                var element=$(this)
+                element.addClass("active")
+                $("#text").text(element.html())
+                $("#selected").show()
+            })
+
+            $(".accordion").accordion({
+                header:"h3",
+                active:"none",
+                collapsible:true})
+
+        })
+    </script>
+</head>
+<body>
+<div id="selectables">
+    <div class="element">
+        <h3>Медицина</h3>
+        <ul>
+            <li>MedIm</li>
+            <li>MedIA</li>
+            <li>FINKI-Med</li>
+        </ul>
+    </div><div class="element">
+        <h3>Образование</h3>
+        <ul>
+            <li>FINKI-Edu</li>
+            <li>Edu-Buddy</li>
+            <li>FINKI-LE</li>
+            <li>FINKI-Math</li>
+        </ul>
+    </div><div class="element">
+        <h3>Сметководство</h3>
+        <ul>
+            <li>eTax</li>
+            <li>FINKI-Tax</li>
+            <li>Tax-All</li>
+            <li>mySalary</li>
+        </ul>
+    </div><div class="element">
+        <h3>Игри</h3>
+        <ul>
+            <li>FINKI-game</li>
+            <li>Grelima</li>
+            <li>Edaolith</li>
+            <li>Foessa</li>
+            <li>Jeroen</li>
+        </ul>
+    </div>
+</div>
+
+<h2 id="selected">You have selected the software package : <span id="text"></span></h2>
+
+<div class="accordion">
+    <h3>Тим</h3>
+    <div class="content">
+        <p>Алберт Ајнштајн</p>
+        <p>Ален Тјуринг</p>
+        <p>Архимед</p>
+    </div>
+</div>
+
+<div class="accordion">
+    <h3>Претставништва</h3>
+    <div class="content">
+        <p>Скопје</p>
+        <p>Прилеп</p>
+        <p>Велес</p>
+    </div>
+</div>
+
+<div class="accordion">
+    <h3>Контакт</h3>
+    <div class="content">
+        <p>Ул. Есенска 24/5 1000 Скопје</p>
+        <p>+38921234567</p>
+        <p>finkiit@iaispit.com</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>Components</title>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<style type="text/css">
+        
+        </style>
+        <script type="text/javascript">
+			$(document).ready(function(){
+				function getEntries(year){
+					$.ajax({
+						url: "http://ergast.com/api/f1/"+year+"/drivers.json",
+						dataType: "jsonp",
+						success: function (data) {
+							$.each(data.MRData.DriverTable.Drivers, function (i,item) {	
+								var name = item.givenName + " " + item.familyName;
+								var url = item.url;	
+								var nationality = item.nationality;
+								var date = item.dateOfBirth;
+								$("#"+year).append("<li title='"+nationality+"'><div class='container2'><p>"+name+"</p><label style='float:left'>Date of birth:</label><div id='pbl'>"+date+"</div><a href='"+url+"'>Link</a></div></li>");
+							});						
+						}	
+					});
+				
+				}
+			
+				getEntries(2020);
+				getEntries(2021);
+				getEntries(2022);
+
+				$( "#tabs" ).tabs();
+				
+				$( "#list4" ).sortable({
+				
+				});
+				$( "#2020" ).sortable({
+					connectWith: "#list4"
+				});	 
+				$( "#2021" ).sortable({
+					connectWith: "#list4"
+				});
+				$( "#2022" ).sortable({
+					connectWith: "#list4"
+				});
+			 
+				$( "#2020, #2021, #2022, #list4" ).disableSelection();
+				
+				$(document).tooltip({
+					items: "#list4 li, #2022 li, #2021 li, #2020 li",
+					content: function(){
+						var el = $(this);
+						var description = el.attr("title");
+						
+						return "Description: " +  description;
+					}
+				});
+			
+			 });	
+						 
+			
+				
+        </script>
+		<style>
+			.container{
+				float:left;
+				margin:20px;
+				padding: 5px;				
+			}
+			.container1{
+				float:left;				
+				padding: 5px;				
+			}
+			.container2{
+				width: 500px;
+			}
+			.li:nth-child(odd) { background: white;}
+			.li:nth-child(even) { background: lightblue; }
+			
+			.container:nth-child(even){
+				border-left: 1px lightgray solid;			
+			}
+			#2020, #2021, #2022, #list4{
+				list-style-type: none;
+			}
+			.row-selected{
+ 			background:lightblue;
+			}
+			
+		</style>
+	</head>
+	<body>
+    <div id="tabs" style="min-height:5000px">
+    <ul>
+        <li><a href="#tabs-1">Drivers 2020</a></li>
+        <li><a href="#tabs-2">Drivers 2021</a></li>
+        <li><a href="#tabs-3">Drivers 2022</a></li>
+    </ul>
+
+    <div id="tabs-1">
+
+    	<div class="container" style="float:left">
+			<strong>Drivers 2020</strong>
+			<ul id="2020"></ul>
+		</div>
+    </div>
+	<div id="tabs-2">
+    	<div class="container" style="float:left">
+			<strong>Drivers 2021</strong>
+			<ul id="2021"></ul>
+		</div>
+    </div>
+	<div id="tabs-3">
+    	<div class="container" style="float:left">
+			<strong>Drivers 2022</strong>
+			<ul id="2022"></ul>
+		</div>
+    </div>
+
+
+	<div id="fav" class="container1" style="float:left">
+			<strong>Favourites</strong>
+			<ul id="list4">
+			<li>Drop you favourite drivers here...</li>
+			</ul>
+		</div>
+	</div>
+
+	</body>
+</html>

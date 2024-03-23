@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+
+    .ui-dialog .ui-dialog-titlebar{
+      background: #cd0a0a;
+    }
+
+  </style>
+  <script>
+    $(document).ready(function (){
+      $("#modalDialog").dialog({
+        autoOpen:false,
+        modal: true,
+        buttons:{
+          "Cancel":function (){ $(this).dialog("close");},
+          "Proceed":function (){ $("#showData").html($("#inputData").val());
+          $("#modalDialog").dialog("close");
+          }
+        }
+      });
+      $("#enterData").click(function (){
+        $("#modalDialog").dialog("open");
+      })
+    })
+
+
+  </script>
+</head>
+<body>
+<button id="enterData">Enter data</button>
+<p id="showData"></p>
+<div id="modalDialog" title="Input">
+  <p>Enter your name and surname below:</p>
+  <input id="inputData" type="text"/>
+</div>
+</body>
+</html>

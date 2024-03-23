@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L7Z1</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        ul{
+            list-style: none;
+            padding: 0;
+            margin-right: 100px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#tabs").tabs();
+
+            $( "#basket" ).sortable({
+                connectWith:"#players, #mixers"
+            });
+            $( "#players" ).sortable({
+                connectWith: "#basket"
+            });
+            $( "#mixers" ).sortable({
+                connectWith: "#basket"
+            });
+        })
+    </script>
+
+</head>
+<body>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Players</a></li>
+        <li><a href="#tabs-2">Mixers</a></li>
+        <li><a href="#tabs-3">Basket</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        <div class="container" style="float:left">
+            <strong>Players</strong>
+            <ul id="players">
+                <li>Type 1</li>
+                <li>Type 2</li>
+                <li>Type 3</li>
+                <li>Type 4</li>
+                <li>Type 5</li>
+                <li>Type 6</li>
+                <li>Type 7</li>
+            </ul>
+        </div>
+    </div>
+    <div id="tabs-2">
+        <div class="container" style="float:left">
+            <strong>Mixers</strong>
+            <ul id="mixers">
+                <li>Model 1</li>
+                <li>Model 2</li>
+                <li>Model 3</li>
+                <li>Model 4</li>
+                <li>Model 5</li>
+                <li>Model 6</li>
+                <li>Model 7</li>
+            </ul>
+        </div>
+    </div>
+    <div id="tabs-3">
+        <div class="container" style="float:left">
+            <strong>Basket</strong>
+        </div>
+    </div>
+</div>
+
+<div id="fav" class="container1" style="float:left">
+    <strong>Basket</strong>
+    <ul id="basket">
+        <li>Fill me up!</li>
+    </ul>
+</div>
+</div>
+
+</body>
+</html>

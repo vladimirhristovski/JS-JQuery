@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z4</title>
+  <style>
+    div{
+      display: block;
+      margin: 15px;
+    }
+    input{
+      width: 45px;
+    }
+  </style>
+  <script>
+    function add() {
+      var r1=document.getElementById("realOne").value
+      var i1=document.getElementById("imagOne").value
+      var r2=document.getElementById("realTwo").value
+      var i2=document.getElementById("imagTwo").value
+      var r=parseInt(r1)+parseInt(r2)
+      var i=parseInt(i1)+parseInt(i2)
+      document.getElementById("realRes").value=r
+      document.getElementById("imagRes").value=i
+    }
+  </script>
+</head>
+<body>
+<div>
+<input id="realOne" type="text">
+<input id="imagOne" type="text"><i> i</i>
+</div>
+<div>
+<input id="realTwo" type="text">
+<input id="imagTwo" type="text"><i> i</i>
+</div>
+<div>
+<button onclick="add()">Add</button>
+</div>
+<div>
+<input id="realRes" type="text">
+<input id="imagRes" type="text"><i> i</i>
+</div>
+</body>
+</html>

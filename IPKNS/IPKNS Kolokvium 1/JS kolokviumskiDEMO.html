@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #infoContainer{
+      display: inline-block;
+      width: 250px;
+      vertical-align: top;
+    }
+    #infoContainer [type="text"]{
+      float: right;
+      margin-top: 16px;
+    }
+    #infoContainer p{
+      display: inline-block;
+      width: 70px;
+    }
+    #accepted,#pending,td,th,tr{
+      padding: 2px 5px 2px 5px;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <script>
+    function isString(input) {
+      return ((Object.prototype.toString.call(input) === "[object String]")&&isNaN(parseInt(input))&&input.length!==0)
+    }
+    var id=1
+    function func(button) {
+      var table=document.getElementById('pending')
+      var newTable=document.getElementById('accepted')
+      var parent=button.parentNode.parentNode
+      var id=parent.children[0].innerHTML
+      var name=parent.children[1].innerHTML
+      var surname=parent.children[2].innerHTML
+      var age=parent.children[3].innerHTML
+      var gender=parent.children[4].innerHTML
+      var hasPassport=parent.children[5].innerHTML
+      newTable.innerHTML+=("<tr style=background:green><td>"+id+"</td><td>"+name+"</td><td>"+surname+"</td><td>"+age+"</td><td>"+gender+"</td><td>"+hasPassport+"</td><td>"+"Accepted"+"</td></tr>")
+      var tr=button.parentNode.parentNode.parentNode
+      table.removeChild(tr)
+      // remove row
+
+      // var tr=button.parentNode.parentNode;
+      // tr.style.background="red"
+      // button.parentNode.removeChild(button)
+      //remove button add color to row
+
+    }
+    var total=0
+    function send() {
+      var name = document.getElementById('name').value
+      if(!isString(name)){
+        alert("Not a name")
+        return
+      }
+      var surname = document.getElementById('surName').value
+      if(!isString(surname)){
+        alert("Not a surname")
+        return
+      }
+      var age = document.getElementById('age').value
+      if(isNaN(age)){
+        alert("Not a number in age")
+        return;
+      }
+      var gender=document.getElementById('gender').value
+      var hasPassport=document.getElementsByName('hasPassport')
+      for (let i = 0; i < hasPassport.length; i++) {
+        if(hasPassport[i].checked)
+          hasPassport=hasPassport[i].value;
+      }
+      var buttonNumber=document.getElementsByTagName("button")
+      alert("Sent successfully")
+      document.getElementById('message').value="Sent successfully"
+      var table=document.getElementById('pending')
+      table.innerHTML+=("<tr><td>"+(buttonNumber.length)+"</td><td>"+name+"</td><td>"+surname+"</td><td>"+age+"</td><td>"+gender+"</td><td>"+hasPassport+"</td><td>"+"<button onclick='func(this,)'>Accept</button>"+"</td></tr>")
+      // table.innerHTML+=("<tr><td>"+(id++)+"</td><td>"+name+"</td><td>"+surname+"</td><td>"+age+"</td><td>"+gender+"</td><td>"+hasPassport+"</td><td>"+"<button onclick='func(this)'>Accept</button>"+"</td></tr>")
+      var num = document.getElementById("number").innerHTML=buttonNumber.length-1
+      total+=buttonNumber.length-1
+      var cost=document.getElementById("cost").innerHTML=total
+    }
+
+
+  </script>
+</head>
+<body>
+<div id="infoContainer">
+  <p>Name :</p>
+  <input id="name" type="text" placeholder="Enter your name">
+  <p>Surname :</p>
+  <input id="surName" type="text" placeholder="Enter your surname">
+  <p>Age :</p>
+  <input id="age" type="text" placeholder="Enter your age">
+  <br>
+  <br>
+  <select id="gender">
+    <option>Male</option>
+    <option>Female</option>
+  </select>
+  <br>
+  <br>
+  <form id="passport">
+  <input type="radio" name="hasPassport" value="Yes"><label>Yes</label>
+  <input type="radio" name="hasPassport" value="No"><label>No</label>
+  </form>
+  <br>
+  <button id="send" onclick="send()">Send</button>
+  <br>
+  <br>
+  <input type="text" disabled id="message">
+</div>
+<br>
+<br>
+<p>Total active : <span id="number"></span></p>
+<p>Total cost : <span id="cost"></span></p>
+<br>
+<br>
+<div class="contentContainer">
+  <table id="pending">
+    <tr><th>ID</th><th>Name</th><th>Surname</th><th>Age</th><th>Gender</th><th>Has Passport</th><th>Validate</th></tr>
+  </table>
+</div>
+<br>
+<br>
+<div class="contentContainer">
+  <table id="accepted">
+    <tr><th>ID</th><th>Name</th><th>Surname</th><th>Age</th><th>Gender</th><th>Has Passport</th><th>Validate</th></tr>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z1</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        #input-container p {
+            margin-bottom: 0;
+        }
+
+        .film {
+            margin-top: 20px;
+            border: 1px dotted lightgray;
+            display: inline-block;
+            background: mediumpurple;
+            width: 200px;
+            vertical-align: top;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".film").hide()
+            var data = [{
+                desc: "A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission and himself.",
+                label: "Oblivion"
+            },
+                {
+                    desc: "Young Ender Wiggin is recruited by the International Military to lead the fight against the Formics, a genocidal alien race which nearly annihilated the human race in a previous invasion.",
+                    label: "Ender's Game"
+                },
+                {
+                    desc: "In the year 2154, the very wealthy live on a man-made space station while the rest of the population resides on a ruined Earth. A man takes on a mission that could bring equality to the polarized worlds.",
+                    label: "Elysium"
+                },]
+            $("#autocomplete").autocomplete({
+                source: data
+            }).autocomplete("instance")._renderItem = function (ul, item) {
+                return $("<li>")
+                    .append("<div>" + item.label + "<br>" + item.desc + "</div>")
+                    .appendTo(ul);
+            }
+            $("#autocomplete").on('autocompletechange change', function () {
+                $(".film").hide()
+                var name = this.value
+                name = name.replaceAll("'", "")
+                name = name.replaceAll(" ", "")
+                console.log(name)
+                $("#" + name).show();
+            }).change();
+        })
+    </script>
+</head>
+<body>
+<div id="input-container">
+    <p>Select a movie:</p>
+    <input id="autocomplete" placeholder="Movie name . . .">
+</div>
+
+<div id="film-container">
+    <div id="Oblivion" class="film">
+        <p>A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission
+            and himself.</p>
+    </div>
+
+    <div id="EndersGame" class="film">
+        <p>Young Ender Wiggin is recruited by the International Military to lead the fight against the Formics, a
+            genocidal alien race which nearly annihilated the human race in a previous invasion.</p>
+    </div>
+
+    <div id="Elysium" class="film">
+        <p>In the year 2154, the very wealthy live on a man-made space station while the rest of the population resides
+            on a ruined Earth. A man takes on a mission that could bring equality to the polarized worlds.</p>
+    </div>
+</div>
+</body>
+</html>

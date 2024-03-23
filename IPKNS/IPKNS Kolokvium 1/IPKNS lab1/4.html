@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L1Z4</title>
+  <style>
+    button{
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    function calculate(){
+      var weight=document.getElementById("weight").value;
+      var height=document.getElementById("height").value/100.0;
+      var BMI=weight/Math.pow(height,2);
+      alert("Вашето BMI изнесува : "+BMI.toFixed(1));
+    }
+  </script>
+</head>
+<body>
+<p>Внесете тежина (во килограми) :</p>
+<input type="number" id="weight">
+<p>Внесете висина (во центиметри) :</p>
+<input type="number" id="height">
+<section>
+  <button onclick="calculate()">Calculate</button>
+</section>
+</body>
+</html>

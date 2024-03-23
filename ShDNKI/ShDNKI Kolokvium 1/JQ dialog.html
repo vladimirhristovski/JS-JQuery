@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+    #bar{
+      width: 500px;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $("#dialog").dialog({
+        modal:true,
+        autoOpen:false,
+        show:"blind",
+        hide:"explode"
+      })
+      $("#open").click(function () {
+                $("#dialog").dialog("open")
+
+              }
+      )
+      $("#close").click(function () {
+        var text =$("#input").val()
+        $("#text").html(text)
+        $("#bar").progressbar({
+          value:50
+        })
+        $("#dialog").dialog("close")
+              }
+      )
+      $("#tool").tooltip({
+        track:true,
+        content:"kaj si be"
+      })
+
+    })
+  </script>
+</head>
+<body>
+<button id="open">Click me</button>
+<input type="text" id="tool" title="tooltip">
+<p id="text">da</p>
+<div id="bar"></div>
+<div id="dialog" title="hello">
+  <h1>Hello</h1>
+  <p>This is a paragraph</p>
+  <input type="text" id="input">
+  <button id="close">close</button>
+</div>
+</body>
+</html>

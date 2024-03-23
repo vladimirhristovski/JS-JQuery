@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L1Z5</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery-ui.js"></script>
+    <script src="../../jquery/jquery.js"></script>
+    <style>
+        *{
+            font-family: Arial;
+        }
+        #controlPanel{
+            display: inline-block;
+            width: 340px;
+            border: 1px solid black;
+            margin: 0;
+            padding: 0px 0px 10px 10px;
+            background: deepskyblue;
+        }
+        #controlPanel p{
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        #controlPanel button{
+            padding: 0px 20px 0px 20px;
+        }
+        .change{
+            font-size: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function (){
+            var originalSize=10
+            $("#base").click(function (){
+                originalSize=10;
+                $(".change").animate({
+                    fontSize:originalSize
+                },500);
+            })
+
+            $("#increase").click(function (){
+                originalSize*=1.5;
+                $(".change").animate({
+                    fontSize:originalSize
+                },500);
+            })
+
+            $("#decrease").click(function (){
+                originalSize/=1.5;
+                $(".change").animate({
+                    fontSize:originalSize
+                },500);
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div id="controlPanel">
+    <p><i>Големина на фонт:</i></p>
+    <button id="base">Почетна</button>
+    <button id="increase">Зголеми</button>
+    <button id="decrease">Намали</button>
+</div>
+<div id="text">
+    <h2>How to connect to the internet</h2>
+    <p class="change">To connect to the internet, you'll need an internet service provider (ISP) and some hardware: ISP. An ISP is a company that gives you access to the internet. You sign up for an account with an ISP just as you do for telephone service or utilities. ISPs are usually phone companies (for a DSL or fiber optic connection) or TV providers(for a cable or satellite connection).</p>
+    <p class="change">Hardware. For a broadband connection, such as DSL, fiber optic, or cable, you'll need a broadband modem. This might be included as part of the start-up hardware from your ISP when you sign up for a broadband account. If you plan to share Internet access with multiple PCs by using a home network, you'll also need a router.</p>
+</div>
+</body>
+</html>

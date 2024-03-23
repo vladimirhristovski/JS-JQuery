@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+    .element{
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background: lightgreen;
+      text-align: center;
+      margin-top: 5px;
+      line-height: 70px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $(".element p:nth-child(2)").hide()
+      $(".element").hover(function () {
+        $(this).find('p:nth-child(1)').hide()
+        $(this).find('p:nth-child(2)').show()
+      }, function () {
+        $(this).find('p:nth-child(1)').show()
+        $(this).find('p:nth-child(2)').hide()
+      })
+    })
+  </script>
+</head>
+<body>
+<h1>Grid of equals</h1>
+<div id="grid">
+  <div class="row">
+    <div class="element">
+      <p>1</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>2</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>3</p>
+      <p>Description</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="element">
+      <p>4</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>5</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>6</p>
+      <p>Description</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="element">
+      <p>7</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>8</p>
+      <p>Description</p>
+    </div>
+    <div class="element">
+      <p>9</p>
+      <p>Description</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

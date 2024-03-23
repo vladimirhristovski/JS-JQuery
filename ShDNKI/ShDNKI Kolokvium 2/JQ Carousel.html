@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #carousel{
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        span{
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var step=1
+            var index=1
+            $("#right").click(function () {
+                index===8?index=1:index+=step;
+                $("#1").attr("src","./CompactDigitalCameras/"+index+".png")
+                $("#2").attr("src","./CompactDigitalCameras/"+(index===8?1:index+1)+".png")
+                $("#3").attr("src","./CompactDigitalCameras/"+(index===8?2:index===7?1:index+2)+".png")
+            })
+            $("#left").click(function () {
+                index===1?index=8:index-=step;
+                $("#1").attr("src","./CompactDigitalCameras/"+index+".png")
+                $("#2").attr("src","./CompactDigitalCameras/"+(index===8?1:index+1)+".png")
+                $("#3").attr("src","./CompactDigitalCameras/"+(index===8?2:index===2?8:index+2)+".png")
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="carousel-container">
+    <ul id="carousel">
+        <li><span id="left"><--</span></li>
+        <li><img id="1" src="CompactDigitalCameras/1.png"></li>
+        <li><img id="2" src="CompactDigitalCameras/2.png"></li>
+        <li> <img id="3" src="CompactDigitalCameras/3.png"></li>
+        <li><span id="right">--></span></li>
+    </ul>
+</div>
+</body>
+</html>

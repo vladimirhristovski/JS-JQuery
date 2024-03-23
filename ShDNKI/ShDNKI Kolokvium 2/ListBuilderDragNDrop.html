@@ -1,0 +1,146 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/start/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+		<style>
+			.container{
+				float:left;
+				margin:20px;
+				padding: 20px;				
+			}
+			.container:nth-child(even){
+				border-left: 1px lightgray solid;			
+			}
+			#list1, #list2{
+				list-style-type: none;
+			}
+			li:nth-child(odd) { background: lightgray;}
+			li:nth-child(even) { background: white; }
+
+		</style>
+		<script>
+
+			//hover functionality with jquery, instead of css
+			function liMouseOver() {
+				$("li").hover(function(){
+					$(this).css("cursor","pointer");
+				},function(){
+					$(this).css("cursor","none");
+				});
+			}
+
+			$(document).ready(function() {
+				var $name = $("#name");
+				var $index = $("#index");
+				var $points = $("#points");
+				var $transferredStudent;
+			
+				liMouseOver();
+				
+				$( "#list1" ).sortable({
+					connectWith: "#list2"
+				}).disableSelection();	
+				
+				
+				$( "#list2" ).sortable({
+					receive:function(event, ui){
+						$transferredStudent = $(ui.item);
+						$( "#points-form" ).dialog( "open" );
+					}
+				}).disableSelection();
+				
+				$("#addStudent").click(function() {
+					$( "#dialog-form" ).dialog( "open" );
+				});
+				
+				$( "#dialog-form" ).dialog({
+					autoOpen: false,
+					height: 380,
+					width: 350,
+					modal: true,
+					buttons: {
+						Add: function() {
+								$( "#list1" ).append( "<li>" + $name.val() + " <span>" + $index.val() + "</span> </li>" );									
+								liMouseOver();
+								$( this ).dialog( "close" );
+							}
+						,
+						"Cancel": function() {
+							$( this ).dialog( "close" );
+						}
+					},
+					close: function() {
+						$name.val( "" );
+						$index.val( "" );
+					}
+				});
+				
+				$( "#points-form" ).dialog({
+					autoOpen: false,
+					height: 230,
+					width: 350,
+					closeOnEscape: false,
+					modal: true,
+					buttons: {
+						Add: function() {
+								$transferredStudent.attr('title',	$points.val());
+								$transferredStudent.tooltip();						
+								$( this ).dialog( "close" );
+								$points.val( "" );
+							}
+					},
+					close: function() {
+						$points.val( "" );
+					}
+				});
+				
+				$( "#list2 li" ).tooltip();
+			});
+		</script>		
+	</head>
+	<body>
+		<div class="container">
+			<strong>Enrolled students</strong>
+			<ul id="list1">
+				<li>Petre Petrevski <span>111113</span></li>
+				<li>Ace Acevski <span>111114</span></li>
+				<li>Mite Mitreski <span>111115</span></li>
+			</ul>
+			<input type="button" id="addStudent" value="Add a new student"/>
+		</div>
+		<div class="container">
+			<strong>Students that took the test</strong>
+			<ul id="list2">
+				<li title="90">Nikola Nikolovski <span>111111</span></li>
+				<li title="80">Simona Simonovska <span>111112</span></li>
+			</ul>
+		</div>
+		
+		<div id="dialog-form" title="Add a new student">
+			<p>All fields are required</p>		 
+			<form>
+				<fieldset>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" class="text ui-widget-content
+		ui-corner-all"/>
+					<label for="index">Index</label>
+					<input type="text" name="index" id="index" value="" class="text ui-widget-content
+		ui-corner-all"/>
+				</fieldset>
+			</form>
+		</div>
+		
+		<div id="points-form" title="Enter points">	 
+			<form>
+				<fieldset>
+					<label for="points">Points from the test</label>
+					<input type="text" name="points" id="points" value="" />
+				</fieldset>
+			</form>
+		</div>
+
+	</body>
+</html>

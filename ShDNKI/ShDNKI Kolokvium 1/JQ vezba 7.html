@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+      .selected{
+          background: #cd0a0a;
+      }
+      label{
+          display:  inline-block;
+          width: 100px;
+          margin: 5px;
+      }
+      input{
+          width: 90px;
+          margin: 5px;
+      }
+      li:hover{cursor: pointer;}
+      #feedback { font-size: 1.4em; }
+      .selectable .ui-selecting{ background: #FECA40; }
+      .selectable .ui-selected{ background: #F39814; color: white; }
+      .selectable{ list-style-type: none; margin: 0; padding: 0; width: 40%; display: inline-block;}
+      .selectable li{ margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+      .content{width:300px;background:#eef; padding: 5px; border:1px gray dotted; font-size: 1.4em;}
+
+  </style>
+
+
+  <script>
+      var data=[
+      {
+          value: "oblivion",
+              label: "Oblivion",
+          desc: "A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission and himself."
+      },
+      {
+          value: "enders-game",
+              label: "Ender's Game",
+          desc: "Young Ender Wiggin is recruited by the International Military to lead the fight against the Formics, a genocidal alien race which nearly annihilated the human race in a previous invasion."
+      },
+      {
+          value: "elysium",
+              label: "Elysium",
+          desc: "In the year 2154, the very wealthy live on a man-made space station while the rest of the population resides on a ruined Earth. A man takes on a mission that could bring equality to the polarized worlds."
+      },
+      {
+          value: "edge-of-tomorrow",
+              label: "Edge of Tomorrow",
+          desc: "A military officer is brought into an alien war against an extraterrestrial enemy who can reset the day and know the future. When this officer is enabled with the same power, he teams up with a Special Forces warrior to try and end the war."
+      }
+      ];
+
+      $(document).ready(function (){
+          $("#low-level").hide();
+
+          var indexa=-1;
+          // $.each(data,function (index, item){
+          //     $(".selectable").append("<li class='ui-widget-content' data-index="+index+">"+item.label+"</li>");
+          // })
+          // $(".selectable").selectable();
+          $(".selectable li").click(function (){
+              indexa=$(this).index();
+              console.log(indexa);
+              showData(indexa);
+              // $("li").removeClass("selected");
+              // $(this).addClass("selected");
+          });
+          $('#top').click(function (){
+              $("li").removeClass("selected");
+              $('li[index="'+indexa+'"]').addClass("selected");
+              $("#low-level").hide();
+              $("#high-level").show();
+          });
+          $("#next").click(function (){
+              indexa=(indexa+1)%data.length;
+              // $("li").removeClass("selected");
+              // $('li[index="'+indexa+'"]').addClass("selected");
+              showData(indexa);
+          });
+          $("#prev").click(function (){
+             indexa=indexa-1;
+             if(indexa===-1){
+                 indexa=3;
+             }
+             showData(indexa);
+          });
+      });
+      function showData(indexa){
+          var item=data[indexa];
+          $("#title").html(item.label);
+          $("#desc").html(item.desc);
+          $("#low-level").show();
+          $("#high-level").hide();
+      }
+
+
+  </script>
+</head>
+<body>
+<div id="high-level">
+
+    <ol class='selectable'>
+        <li index="0">Oblivion</li>
+        <li index="1">Ender's Game</li>
+        <li index="2">Elysium</li>
+        <li index="3">Edge of Tomorrow</li>
+    </ol>
+
+</div>
+
+<div id="low-level">
+    <div>
+        <input id="prev" value="prev" type="button"/>
+        <input id="top" value="top" type="button"/>
+        <input id="next" value="next" type="button"/>
+    </div>
+    <label>Title:</label>
+    <div id="title" class="content"></div>
+    <label>Desc:</label>
+    <div id="desc" class="content"></div>
+
+</div>
+</body>
+</html>

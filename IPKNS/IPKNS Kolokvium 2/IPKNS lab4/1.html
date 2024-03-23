@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L4Z1</title>
+    <style>
+        select{
+            width: 158px;
+        }
+        input{
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        #input-container{
+            display: inline-block;
+            width: 226px;
+            justify-content: end;
+            text-align: end;
+            margin: 0;
+        }
+        button{
+            margin-top: 10px;
+        }
+        #pending,td,th,tr{
+            border: 1px solid black;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+    <script>
+        function reset() {
+            document.getElementById('name').value=''
+            document.getElementById('surname').value=''
+            document.getElementById('index').value=''
+            document.getElementById('subject').value=''
+            document.getElementById('grade').value=''
+        }
+        class Student{
+            constructor(name,surname,index,subject,grade) {
+                this.name=name
+                this.surname=surname
+                this.index=index
+                this.subject=subject
+                this.grade=grade
+            }
+        }
+        var students=[]
+
+        function showStudents() {
+            console.log(students)
+        }
+        function send() {
+            var name = document.getElementById('name').value
+            var surname = document.getElementById('surname').value
+            var index = document.getElementById('index').value
+            var subject = document.getElementById('subject').value
+            var grade=document.getElementById('grade').value
+            if(name.length===0||surname.length===0||index.length===0||subject.length===0){
+                alert("Сите полиња се задолжителни!")
+                return
+            }
+            students.push(new Student(name,surname,index,subject,grade))
+            var table=document.getElementById('pending')
+            table.innerHTML+=("<tr><td>"+name+"</td><td>"+surname+"</td><td>"+index+"</td><td>"+subject+"</td><td>"+grade+"</td></tr>")
+            reset()
+        }
+    </script>
+</head>
+<body onload="reset()">
+<h2>Форма за внесување оцени</h2>
+<div id="input-container">
+<label>Име:</label>
+<input id="name" type="text">
+<label>Презиме:</label>
+<input id="surname" type="text">
+<label>Индекс:</label>
+<input id="index" type="text">
+<label>Предмет:</label>
+<input id="subject" type="text">
+<label>Оцена:</label>
+<select id="grade">
+    <option>5 (пет)</option>
+    <option>6 (шест)</option>
+    <option>7 (седум)</option>
+    <option>8 (осум)</option>
+    <option>9 (девет)</option>
+    <option>10 (десет)</option>
+</select>
+    <section>
+    <button onclick='send()'>Внеси</button>
+    </section>
+</div>
+
+<div class="contentContainer">
+    <table id="pending">
+        <tr><th>Име</th><th>Презиме</th><th>Индекс</th><th>Предмет</th><th>Оцена</th></tr>
+    </table>
+</div>
+</body>
+</html>

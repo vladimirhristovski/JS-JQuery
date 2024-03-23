@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #container > *{
+            vertical-align: top;
+        }
+        ul{
+            display: inline-block;
+            width: 200px;
+            list-style: none;
+            padding: 0;
+            margin:5px;
+        }
+        #buttons{
+            display: inline-block;
+            width: 20px;
+        }
+        button{
+            margin-bottom: 5px;
+        }
+        li{
+            margin-bottom: 5px;
+            border: 1px solid black;
+        }
+        .ui-selected{
+            background: orange;
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("li").click(function () {
+                $(this).addClass("ui-selected")
+            })
+            $("#toRight").click(function () {
+                $("#left .ui-selected").appendTo("#right").removeClass("ui-selected")
+            })
+            $("#toLeft").click(function () {
+                $("#right .ui-selected").appendTo("#left").removeClass("ui-selected")
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="container">
+    <ul id="left">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+        <li>Item 7</li>
+    </ul>
+    <div id="buttons">
+        <section><button id="toRight">></button></section>
+        <button id="toLeft"><</button>
+    </div>
+    <ul id="right">
+        <li>Item 8</li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <style>
+        .correct {
+            background: green;
+            color: white;
+        }
+    </style>
+    <script>
+        var src = '[{"id":1,"numbers":[80,72,49,1,34,81,36,2,13,9,54,93,29,18,52]},{"id":2,"numbers":[68,85,24,7,32,12,88,57,35,11,44,58,91,21,22]},{"id":3,"numbers":[16,5,75,64,28,70,50,55,40,77,23,48,98,67,73]}]';
+        var data = JSON.parse(src);
+        var size = 0;
+        window.onload = function () {
+            document.body.innerHTML += ("<p>Current number:<span id='number'></span></p>");
+            numberChange();
+            interval1 = setInterval(numberChange, 1000);
+            data.forEach(data1 => {
+                var i = 0;
+                var table = document.createElement("table");
+                table.style.border = "1px solid black";
+                table.style.marginBottom = "20px";
+                table.setAttribute("id", data1.id);
+                table.setAttribute("correct", "0");
+                var row = table.insertRow();
+                size = data1.numbers.length;
+                data1.numbers.forEach(number => {
+                    if (i === 5) {
+                        i = 0;
+                        row = table.insertRow();
+                    }
+                    var cell = row.insertCell();
+                    cell.addEventListener('click', change);
+                    cell.style.border = "1px solid black";
+                    cell.innerHTML += number;
+                    i++;
+                })
+                document.body.appendChild(table);
+            })
+        }
+
+        var k = 0;
+
+        function numberChange() {
+            document.getElementById("number").innerHTML = Math.floor(Math.random() * 100) + 1;
+            // var numbers=[80,72,49,1,34,81,36,2,13,9,54,93,29,18,52];
+            // if(k==numbers.length){
+            //     k=0;
+            // }
+            // document.getElementById("number").innerHTML=numbers[k++];
+
+        }
+
+        function change() {
+            var number = this.innerHTML;
+            var currentNumber = document.getElementById("number").innerHTML;
+            var table = this.parentNode.parentNode.parentNode
+            var winner = table.getAttribute("id");
+            console.log(winner)
+
+            if (number == currentNumber) {
+                this.classList.add("correct");
+                var num = parseInt(table.getAttribute("correct")) + 1;
+                table.setAttribute("correct", num)
+
+            }
+            if (num === size) {
+                document.body.classList.add("correct");
+                clearInterval(interval1);
+                alert("Winner is : " + winner);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

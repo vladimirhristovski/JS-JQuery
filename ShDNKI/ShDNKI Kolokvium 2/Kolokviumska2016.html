@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    1. Input Hints-->
+    <!--    2. Two panel-->
+    <!--    3. Social Links-->
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        div {
+            display: inline-block;
+            width: 250px;
+        }
+        #book_details {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h1>Books</h1>
+    <input type="text" id="isbn" placeholder="Insert 10 digits ISBN"><span>  Insert book </span>
+    <button id="add">Add book</button>
+</section>
+<div>
+    <ul id="books"></ul>
+</div>
+<div id="book_details">
+    <p>Title: <span id="book_title"></span></p>
+    <p>Publisher: <span id="publisher"></span></p>
+    <p>ISBN: <span id="book_isbn"></span></p>
+    <img id="book_image" src="" alt="Book Image">
+</div>
+<script>
+    $(document).ready(function () {
+        $("#add").click(function () {
+            var book_isbn = $("#isbn").val();
+            console.log(book_isbn);
+            get_data(book_isbn);
+
+            function get_data(book_isbn) {
+                $.ajax({
+                    url: "https://openlibrary.org/api/books?bibkeys=ISBN:" + book_isbn + "&jscmd=details&callback=mycallback",
+                    dataType: "jsonp",
+                    success: function (data) {
+                        var book_title = data["ISBN:" + book_isbn]["details"]["title"];
+                        var book_poster = data["ISBN:" + book_isbn]["thumbnail_url"];
+                        var publishers = data["ISBN:" + book_isbn]["details"]["publishers"];
+
+                        $("<li>")
+                            .append(book_title)
+                            .attr("image", book_poster)
+                            .attr("publishers", publishers)
+                            .attr("isbn", book_isbn)
+                            .appendTo("#books");
+                    }
+                });
+            }
+
+            $(document).on("click", "#books li", function () {
+                var book_title = $(this).html();
+                var book_poster = $(this).attr("image");
+                var book_publisher = $(this).attr("publishers");
+                $("#book_title").html(book_title);
+                $("#publisher").html(book_publisher);
+                $("#book_isbn").html(book_isbn);
+                $("#book_image").attr("src", book_poster);
+                $("#book_details").show();
+            })
+        });
+    });
+</script>
+</body>
+</html>

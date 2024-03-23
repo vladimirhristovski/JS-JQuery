@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z1</title>
+    <style>
+
+    </style>
+    <script>
+        window.onload = function () {
+            var buttons = document.getElementsByTagName('button');
+            var button = buttons[0]
+            button.onclick = function calculate() {
+                let a = document.getElementById('a').value
+                let b = document.getElementById('b').value
+                let operator = document.querySelector('input[name="oper"]:checked')
+                let result = document.getElementById("rezultat")
+                if (a.length === 0 || b.length === 0 || isNaN(a) || isNaN(b)) {
+                    alert("Внесовте погрешно!")
+                    return;
+                }
+                a = parseInt(a)
+                b = parseInt(b)
+                switch (operator.id) {
+                    case "plus":
+                        result.textContent = a + b
+                        break
+                    case "minus":
+                        result.textContent = a - b
+                        break
+                    case "mnoz":
+                        result.textContent = a * b
+                        break
+                    case "del":
+                        result.textContent = a / b
+                        break
+                    case "sin":
+                        result.textContent = Math.sin(a)
+                        break
+                    case "cos":
+                        result.textContent = Math.cos(a)
+                        break
+                    case "tg":
+                        result.textContent = Math.tan(a)
+                        break
+                    case "cel":
+                        result.textContent = Math.abs(a)
+                        break
+                    case "stepen":
+                        result.textContent = Math.pow(a, b)
+                        break
+                    case "koren":
+                        result.textContent = Math.sqrt(a)
+                        break
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Калкулатор</h1>
+<div>
+    <div style="text-align:left; float:left">
+        <p>а <input id="a" style="width:15px"/>
+            b <input id="b" style="width:15px"/></p>
+        <p>
+            <input id="plus" type="radio" name="oper" checked>a+b
+            <input id="minus" type="radio" name="oper">a-b
+            <input id="mnoz" type="radio" name="oper">a*b
+            <input id="del" type="radio" name="oper">a/b
+            <br>
+            <input id="sin" type="radio" name="oper">sin(a)
+            <input id="cos" type="radio" name="oper">cos(a)
+            <input id="tg" type="radio" name="oper">tg(a)
+            <br>
+            <input id="cel" type="radio" name="oper">[a]
+            <input id="stepen" type="radio" name="oper">a<sup>b</sup>
+            <input id="koren" type="radio" name="oper">&radic;<span style="text-decoration:overline">a</span>
+        </p>
+        <button>Пресметај</button>
+        <p id="rezultat"></p>
+    </div>
+</div>
+<br/>
+</body>
+</html>

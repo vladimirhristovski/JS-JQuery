@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L6Z1</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style>
+    #main-container{
+      display: inline-block;
+      width: 300px;
+      border: 1px solid black;
+      padding: 0 20px 30px 20px;
+    }
+    #content-container{
+      display: inline-block;
+      width: 300px;
+      height: 100px;
+      background: palegreen;
+      margin-bottom: 10px;
+    }
+    #insert{
+      background: url("insertButton.png");
+      width: 100px;
+      height: 50px;
+      background-size: cover;
+    }
+    #send{
+      background: url("sendButton.png");
+      width: 100px;
+      height: 50px;
+      background-size: cover;
+    }
+    p{
+      margin-bottom: 0;
+    }
+    .ui-dialog-titlebar-close {
+      display: none;
+    }
+    .ui-dialog-titlebar{
+      background: darkgray;
+      border: 1px solid gray;
+      color: black;
+    }
+    h3{
+      margin-bottom: 0;
+      margin-top: 0;
+      color: red;
+      display: none;
+    }
+    #passwordPrompt p:first-of-type{
+      margin-top: 0;
+    }
+    #content{
+      margin-bottom: 10px;
+      height: 100px;
+      width: 250px;
+      text-align: start;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      var password=""
+      $("#passwordPrompt").dialog({
+        modal: true,
+        autoOpen: true,
+        buttons: [{
+          text:"Ok",
+          click: function () {
+            var score=0
+            password =$("#emailPassword").val();
+            var passwordRepeat=$("#repeatPassword").val();
+            score+=password===passwordRepeat?1:0;
+            score+=password.length>=6?1:0
+            score+=/[!@#$%^&*()_+]+/.test(password)?1:0
+            console.log(password)
+            console.log(score)
+            if(score===3){
+              $(this).dialog("close")
+              $("#paasswordError").hide()
+            }else {
+              $("#paasswordError").show()
+            }
+          }
+        }]
+      })
+
+      $("#messagePrompt").dialog({
+        modal: true,
+        autoOpen: false
+      })
+
+      $("#passwordCheck").dialog({
+        modal: true,
+        autoOpen: false,
+        buttons: [{
+          text:"Ok",
+          click: function () {
+            var score=0
+            var passwordCheck=$("#checkPassword").val();
+            score+=password===passwordCheck?1:0;
+            console.log(password)
+            console.log(score)
+            if(score===1){
+              $(this).dialog("close")
+              $("#paasswordCheckError").hide()
+              $("#checkPassword").val("");
+            }else {
+              $("#paasswordCheckError").show()
+            }
+          }
+        }]
+      })
+
+      $("#insert").click(function () {
+        var to=$("#toEmail").val()
+        var cc=$("#ccEmail").val()
+        var subject=$("#subjectEmail").val()
+        if(to.length===0||cc.length===0||subject.length===0){
+          alert("Fill in all the fields!")
+          return;
+        }
+        $("#to").html(to)
+        $("#cc").html(cc)
+        $("#subject").html(subject)
+        $("#messagePrompt").dialog("open")
+      })
+
+      $("#insertMessage").click(function (){
+        var content=$("#content").val()
+        $("#contentEmail").html(content)
+        $("#messagePrompt").dialog("close")
+      })
+
+      $("#clear").click(function () {
+        $("#toEmail").val("")
+        $("#ccEmail").val("")
+        $("#subjectEmail").val("")
+        $("#content").val("")
+        $("#contentEmail").html("")
+        $("#messagePrompt").dialog("close")
+      })
+
+      $("#send").click(function () {
+        var to=$("#toEmail").val()
+        var cc=$("#ccEmail").val()
+        var subject=$("#subjectEmail").val()
+        if(to.length===0||cc.length===0||subject.length===0){
+          alert("Fill in all the fields!")
+          return;
+        }
+        $("#passwordCheck").dialog("open")
+      })
+    })
+  </script>
+</head>
+<body>
+<div id="passwordPrompt" title="Set your password">
+  <h3 id="paasswordError">Passwords error!</h3>
+    <p>New Password:</p>
+    <input type="password" id="emailPassword">
+    <p>Repeat Password:</p>
+     <input type="password" id="repeatPassword">
+</div>
+
+<div id="messagePrompt" title="Message Content">
+  <p>To: <span id="to"></span></p>
+  <p>Subject: <span id="subject"></span></p>
+  <p>Cc: <span id="cc"></span></p>
+  <br>
+  <p>Content:</p>
+  <textarea id="content"></textarea>
+  <section>
+    <button id="insertMessage">Insert</button>
+    <button id="clear">Clear</button>
+  </section>
+</div>
+
+<div id="passwordCheck" title="Password">
+  <h3 id="paasswordCheckError">Passwords error!</h3>
+  <p>Password:</p>
+  <input type="password" id="checkPassword">
+</div>
+
+<div id="main-container">
+  <h1>New message:</h1>
+  <p>To:</p>
+  <input id="toEmail" type="text">
+  <p>Cc:</p>
+  <input id="ccEmail" type="text">
+  <p>Subject:</p>
+  <input id="subjectEmail" type="text">
+  <p>Content:</p>
+  <div id="content-container">
+    <span id="contentEmail"></span>
+  </div>
+  <section>
+    <button id="insert"></button>
+    <button id="send"></button>
+  </section>
+</div>
+</body>
+</html>

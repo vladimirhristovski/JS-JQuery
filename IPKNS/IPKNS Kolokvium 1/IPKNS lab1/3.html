@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L1Z3</title>
+  <script>
+    var array1=prompt("Внесете го првиот стринг :")
+    var array2=prompt("Внесете го вториот стринг :")
+    var array3=prompt("Внесете го третиот стринг :")
+    var max=null;
+    var longest=0;
+    var str1=array1.split(" ");
+    var str2=array2.split(" ");
+    var str3=array3.split(" ");
+
+    for (let i = 0; i < str1.length; i++) {
+      if(longest<str1[i].length){
+        longest=str1[i].length;
+        max=str1[i];
+      }
+    }
+    for (let i = 0; i < str2.length; i++) {
+      if(longest<str2[i].length){
+        longest=str2[i].length;
+        max=str2[i];
+      }
+    }
+    for (let i = 0; i < str3.length; i++) {
+      if(longest<str3[i].length){
+        longest=str3[i].length;
+        max=str3[i];
+      }
+    }
+    alert(max);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

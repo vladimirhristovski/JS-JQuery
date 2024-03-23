@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z3</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style></style>
+  <script>
+    $(document).ready(function () {
+      $("#dialog").dialog({
+        autoOpen:false,
+        modal:true,
+        buttons:{
+          "Close":function (){
+            $(this).dialog("close")
+          },
+          "Add book":function () {
+            var title=$("#title").val()
+            var author=$("#author").val()
+            var comment=$("#comment").val()
+            $("#books").append("Title : "+title+"<br>Author : "+author+"<br>Comment : "+comment+"<br><br>")
+            $(this).dialog("close")
+          }
+        }
+      })
+      $("#addBook").click(function () {
+        $("#dialog").dialog("open")
+      })
+    })
+  </script>
+</head>
+<body>
+<div id="dialog" title="Add a book">
+  <p>Book title :</p>
+  <input type="text" id="title">
+  <p>Book author :</p>
+  <input type="text" id="author">
+  <p>Book comment :</p>
+  <input type="text" id="comment">
+</div>
+<button id="addBook">Add Book</button>
+<div id="books">
+<h3>Books :</h3>
+</div>
+</body>
+</html>

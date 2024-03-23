@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+      function isString(input) {
+          return ((Object.prototype.toString.call(input) === "[object String]")&&isNaN(parseInt(input))&&input.length!==0)
+      }
+    function get() {
+      name=prompt("Enter your name :","name")
+        if(!isString(name)){
+            alert("Not a name")
+        }
+      surname=prompt("Enter your surname :","surname")
+        if(!isString(surname)){
+            alert("Not a surname")
+        }
+      age=parseInt(prompt("Enter your age ","age"))
+      if(!isNaN(age)){
+        document.getElementById('table').innerHTML+=("<tr><td>"+name+"</td><td>"+surname+"</td><td>"+age+"</td></tr>")
+      }else alert("Not a number")
+    }
+  </script>
+</head>
+<body>
+<button id="button" onclick="get()">The time is?</button>
+<table id="table">
+  <tr><th>Name</th><th>Surname</th><th>Age</th></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <style>
+
+    </style>
+    <script>
+        var src = '[{"color":"red", "size":"50"},{"color":"blue", "size":"40"},{"color":"orange", "size":"30"},{"color":"green", "size":"20"},{"color":"yellow", "size":"50"}]';
+        var data = JSON.parse(src);
+
+        window.onload = function createObjects() {
+            data.forEach(data1=>{
+                var obj=document.createElement("div")
+                obj.style.background=data1.color;
+                obj.style.width=data1.size+"px";
+                obj.style.height=data1.size+"px";
+                obj.style.top=Math.floor(Math.random()*500)+"px";
+                obj.style.left=Math.floor(Math.random()*500)+"px";
+                obj.style.position="absolute";
+                obj.addEventListener('click',change);
+                document.body.append(obj);
+            })
+        }
+
+        function change() {
+            var blocks=[this];
+            var transformX=[this.offsetWidth,-1*this.offsetWidth,-1*this.offsetWidth,this.offsetWidth];
+            var transformY=[this.offsetHeight,this.offsetHeight,-1*this.offsetHeight,-1*this.offsetHeight];
+            for (let i = 0; i < 3; i++) {
+                var clone=this.cloneNode(true);
+                clone.addEventListener('click',change);
+                blocks.push(clone);
+                document.body.append(clone);
+            }
+            for (let i = 0; i < blocks.length; i++) {
+                anime({
+                    targets: blocks[i],
+                    top: blocks[i].offsetTop + transformX[i],
+                    left: blocks[i].offsetLeft + transformY[i],
+                    duration: 300,
+                    easing:"linear"
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

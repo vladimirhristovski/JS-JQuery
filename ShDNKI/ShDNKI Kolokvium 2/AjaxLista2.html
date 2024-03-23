@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+    ul{
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+<button id="add">Add new movie</button>
+<ul id="movies">
+</ul>
+<p>Title : <span id="title"></span></p>
+<p>ImdbID : <span id="id"></span></p>
+<p>Rating : <span id="rating"></span></p>
+<p>Director : <span id="dir"></span></p>
+<p>Actors : <span id="actors"></span></p>
+<img src="" id="poster">
+<div id="dialog_movie">
+  <p>Movie title:</p>
+  <input type="text" id="movie_title">
+</div>
+<script>
+  $(document).ready(function () {
+    $("#add").click(function () {
+      $("#dialog_movie").dialog("open")
+    })
+    $("#dialog_movie").dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        Add: function () {
+          var movie_title = $("#movie_title").val()
+          $("<li>").append(movie_title).appendTo("#movies")
+          $("#dialog_movie").dialog("close")
+        }
+      }
+    })
+    $(document).on("click", "#movies li",function () {
+      var movie_title = $(this).html()
+      get_data(movie_title)
+    })
+    function get_data(movie_name) {
+      $.ajax({
+        url: "https://www.omdbapi.com/?apikey=a6592a8d&t="+movie_name,
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+          $("#title").html(data["Title"])
+          $("#id").html(data["imdbID"])
+          $("#rating").html(data["imdbRating"])
+          $("#dir").html(data["Director"])
+          $("#actors").html(data["Actors"])
+          $("#poster").attr("src", data["Poster"])
+        }
+      })
+    }
+  })
+</script>
+</body>
+</html>

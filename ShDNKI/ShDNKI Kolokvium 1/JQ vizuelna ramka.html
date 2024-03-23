@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../jquery/jquery-ui.css">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../jquery/jquery-ui.js"></script>
+  <style>
+
+
+  </style>
+  <script>
+    $(document).ready(function () {
+      $("div").hide();
+      $("button").click(function () {
+        var id=$(this).attr("id")
+        $("div").hide()
+        $("#tab_"+id).show()
+      })
+    })
+  </script>
+</head>
+<body>
+
+  <h3>Navigation bar</h3>
+  <button id="1">Tab 1</button>
+  <button id="2">Tab 2</button>
+  <button id="3">Tab 3</button>
+
+<div id="tab_1">
+  <h3>Content bar</h3>
+  <p>Lorem ipsum ...</p>
+</div>
+<div id="tab_2">
+  <h3>More content</h3>
+  <p>Dolor ipsum ...</p>
+</div>
+<div id="tab_3">
+  <h3>Last content</h3>
+  <p>Ipsum dolor lorem ...</p>
+</div>
+</body>
+</html>

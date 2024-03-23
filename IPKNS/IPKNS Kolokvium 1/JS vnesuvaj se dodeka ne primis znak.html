@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    num1=parseInt(prompt("Insert first number :","first number . . ."))
+    if(Number.isNaN(num1)){
+      alert("Not a number!")
+    }
+    var num=0;
+    var max=num1
+    while(!isNaN(num1)) {
+      if(num1%3===0){
+        num++;
+      }
+      if(max<num1){
+        max=num1;
+      }
+      num1 = parseInt(prompt("Insert second number :", "second number . . ."))
+      if (Number.isNaN(num1)) {
+        alert("Not a number!")
+      }
+    }
+    alert(num)
+    alert(max)
+  </script>
+</head>
+<body>
+
+</body>
+</html>

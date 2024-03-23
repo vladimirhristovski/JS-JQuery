@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    function capitalize(input) {
+      return input=input.charAt(0).toUpperCase()+input.slice(1)
+    }
+    function insert(input, add, pos) {
+      if(typeof (pos)=="undefined"){
+        pos=0;
+      }
+      if(typeof (add)=="undefined"){
+        add=''
+      }
+      return input.slice(0,pos)+add+input.slice(pos)
+    }
+    
+    function stringParametrize(input) {
+      return input.trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/,"").replace(/\s/g,"-")
+    }
+
+    function truncate(input, pos, end) {
+      if(typeof (end)=="undefined"){
+        end="..."
+      }
+      if(typeof (pos)=="undefined"){
+        pos=input.length+end.length
+      }
+      if((input.length+end.length)>pos){
+        return(input.slice(0,pos)+end)
+      }else return input
+    }
+    function removeFirst(input,remove) {
+      var idx=input.indexOf(remove)
+      if(idx===-1){
+        return input
+      }else return input.slice(0,idx)+input.slice(idx+remove.length)
+    }
+
+    function subStrAfter(input,border,type) {
+      if(type==='a'){
+        var idx=input.indexOf(border)
+        return input.slice(0,idx)
+      }else if(type==='b'){
+        var idx=input.indexOf(border)
+        return input.slice(idx,input.length)
+      }
+    }
+    var string = "jas sum Vladimir hristovski"
+    console.log()
+  </script>
+</head>
+<body>
+
+</body>
+</html>

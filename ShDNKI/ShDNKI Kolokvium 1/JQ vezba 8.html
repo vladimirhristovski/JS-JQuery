@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        div{
+            display: inline-block;
+        }
+        li{
+            display: inline-block;
+            padding: 20px;
+        }
+        ul{
+            text-align: left;
+        }
+        .current{
+            background: #1c94c4;
+        }
+        .past{
+            background: #9dc8e2;
+        }
+        .next{
+            background: #aaaaaa;
+        }
+    </style>
+    <script>
+        $(document).ready(function (){
+            var indexa=0;
+            $(".active div").hide();
+            $('.active div[index="'+indexa+'"]').show();
+            $("li").addClass("next");
+            $('li[index="'+indexa+'"]').removeClass("next").addClass("current");
+            $("#next").click(function (){
+                indexa=indexa+1;
+                if(indexa===4){
+                    alert("DONE")
+                    indexa=3;
+                }
+                $('li[index="'+indexa+'"]').removeClass("next").addClass("current");
+                $('li[index="'+(indexa-1)+'"]').removeClass("current").addClass("past");
+                $(".active div").hide();
+                $('.active div[index="'+indexa+'"]').show();
+            })
+            $("#prev").click(function (){
+                indexa=indexa-1;
+                if(indexa===-1){
+                    indexa=0;
+                }
+                $('li[index="'+indexa+'"]').removeClass("past").addClass("current");
+                $('li[index="'+(indexa+1)+'"]').removeClass("current").addClass("next");
+                $(".active div").hide();
+                $('.active div[index="'+indexa+'"]').show();
+            })
+        })
+
+    </script>
+</head>
+<body>
+<ul>
+    <li index="0">Account</li>
+    <li index="1">Profile</li>
+    <li index="2">Hints</li>
+    <li index="3">Finish</li>
+</ul>
+<div class="active">
+<div index="0">
+    <h3>Account</h3>
+
+        <p >User name</p>
+        <input type="text">
+        <p>Password</p>
+    <input type="text">
+        <p>Confirm Password</p>
+    <input type="text">
+
+</div>
+<div index="1">
+    <h3>Profile</h3>
+
+    <p >User name</p>
+    <input type="text">
+    <p>Password</p>
+    <input type="text">
+    <p>Confirm Password</p>
+    <input type="text">
+
+</div>
+<div index="2">
+    <h3>Hints</h3>
+    <p >User name</p>
+    <input type="text">
+    <p>Password</p>
+    <input type="text">
+    <p>Confirm Password</p>
+    <input type="text">
+</div>
+<div index="3">
+    <h3>Finish</h3>
+    <p >User name</p>
+    <input type="text">
+    <p>Password</p>
+    <input type="text">
+    <p>Confirm Password</p>
+    <input type="text">
+</div>
+</div>
+<section>
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+</section>
+</body>
+</html>

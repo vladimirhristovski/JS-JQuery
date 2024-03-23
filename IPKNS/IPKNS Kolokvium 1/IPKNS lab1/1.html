@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L1Z1</title>
+    <script>
+        var number = prompt("Внеси четирицифрен број :");
+        if (!isNaN(parseInt(number))) {
+            var isPalindorme = true;
+            var isDevidable = false;
+            var sum = 0;
+            for (let i = 0; i < number.length; i++) {
+                if (number.charAt(i) !== number.charAt(number.length - 1 - i)) {
+                    isPalindorme = false;
+                }
+                sum += parseInt(number.charAt(i));
+            }
+            if (parseInt(number) % sum === 0) {
+                isDevidable = true;
+            }
+            if (number.length !== 4) {
+                alert("Не може да се провери внесениот број.");
+            } else {
+                if (isPalindorme && isDevidable) {
+                    alert("Бројот е палиндром и е деллив со збирот на неговите цифри");
+                } else if (isPalindorme && !isDevidable) {
+                    alert("Бројот е палиндром и не е деллив со збирот на неговите цифри");
+                } else if (!isPalindorme && !isDevidable) {
+                    alert("Бројот не е палиндром и не е деллив со збирот на неговите цифри");
+                } else if (!isPalindorme && isDevidable) {
+                    alert("Бројот не е палиндром и е деллив со збирот на неговите цифри");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

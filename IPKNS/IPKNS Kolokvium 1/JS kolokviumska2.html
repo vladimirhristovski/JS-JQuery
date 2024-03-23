@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    h2{
+      text-align: center;
+    }
+    #contentContainer{
+      text-align: center;
+      vertical-align: top;
+    }
+    #contentContainer div{
+      margin: 15px;
+    }
+  </style>
+  <script>
+    function checkId(input) {
+      var charArray=input.split("")
+      for (let i = 0; i < charArray.length; i++) {
+        if(isNaN(charArray[i])){
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function findId(input) {
+      var maindiv=document.getElementById(input)
+      if(maindiv===null){
+        return false
+      }else {
+        return true
+      }
+    }
+    var idNum=0
+    var sellNum=0
+    function add() {
+      var username=document.getElementById('username').value
+      var id=document.getElementById('id').value
+      var width=document.getElementById('width').value
+      var height=document.getElementById('height').value
+      var color=document.getElementById('color').value
+      if(username==="" || id==="" || width==="" || height==="" || color===""){
+        alert("Гршка")
+        return
+      }
+      if(!checkId(id)){
+        alert("Id треба да се состои само од бројки")
+        return;
+      }
+      if(width==0||width>500||height==0||height>500){
+        alert("Должината и висината мора да се ненулти вредности и не смеат да бидат повеќе од 500.")
+        return;
+      }
+      var totalPrice=height*width*0.5
+      if(color==="red"){
+        totalPrice+=1000
+      }
+      if(findId(id)){
+        var div=document.getElementById(id)
+        var main=document.getElementById(id).parentNode
+        main.removeChild(div)
+        main.innerHTML+=("<div id="+id+" style='display:inline-block; background:"+color+"; width:"+width+"px; height:"+height+"px '><p>Id: "+id+"</p><p>Width: "+width+"</p><p>Height: "+height+"</p><p>Color: "+color+"</p><p>Vkupna sum: "+totalPrice+"</p><button onclick='sell(this)'>Sell</button>")
+        return;
+      }
+
+
+      var div=document.getElementById('contentContainer')
+      div.innerHTML+=("<div id="+id+" style='display:inline-block; background:"+color+"; width:"+width+"px; height:"+height+"px '><p>Id: "+id+"</p><p>Width: "+width+"</p><p>Height: "+height+"</p><p>Color: "+color+"</p><p>Vkupna sum: "+totalPrice+"</p><button onclick='sell(this)'>Sell</button>")
+    }
+    function sell(object) {
+      var div=object.parentNode
+      var maindiv=object.parentNode.parentNode
+      maindiv.removeChild(div)
+      document.getElementById('number').innerHTML=++sellNum
+    }
+  </script>
+</head>
+<body>
+<h2>User Cards</h2>
+
+<div id="inputContainer">
+  <label>Username</label><input type="text" id="username"><br><br>
+  <label>Id</label><input type="text" id="id"><br><br>
+  <label>Width</label><input type="text" id="width"><label>px</label><br><br>
+  <label>Height</label><input type="text" id="height"><label>px</label><br><br>
+  <label>Username</label><select id="color"><br><br>
+  <option>red</option>
+  <option>yellow</option>
+  <option>green</option>
+  <option>blue</option>
+</select><br><br>
+  <button onclick="add()">Add</button><br>
+  <p>Вкупно продадени: <strong id="number">0</strong></p>
+</div>
+
+<div id="contentContainer">
+
+</div>
+
+</body>
+</html>

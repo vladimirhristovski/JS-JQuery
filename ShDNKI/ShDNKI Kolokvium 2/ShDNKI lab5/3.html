@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z3</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        #item-container p {
+            display: inline-block;
+            background: darkseagreen;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        #list-holder {
+            list-style: none;
+            padding: 0;
+
+        }
+
+        #list-holder li {
+            width: 250px;
+            border: 1px solid darkgray;
+            padding: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        #list-holder .ui-selected {
+            background: mediumseagreen;
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#list-holder").mousedown(function (e) {
+                e.metaKey = true;
+            }).selectable();
+
+            $("#list-holder").mouseout(function() {
+                show()
+            });
+            function show() {
+                var items=$(".ui-selected")
+                var display = $("#item-holder")
+                display.text("")
+                console.log(items)
+                items.each(function () {
+                    display.append($(this).context.textContent + " ")
+                })
+            }
+
+
+            $("#add").click(function () {
+                var item = $("#new").val()
+                if (item.length === 0) {
+                    alert("You need to specify the item!")
+                    return
+                }
+                var list = $("#list-holder")
+                $('<li>' + item + '</li>').appendTo(list)
+            })
+
+            $("#remove").click(function () {
+                $("#item-holder").text("")
+                $(".ui-selected").each(function () {
+                    $(this).remove()
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<p>New Itwm:</p>
+<br>
+<input id="new" type="text">
+<br>
+<br>
+<section>
+    <button id="add">Add new Item</button>
+    <button id="remove">Delete Selected Items</button>
+</section>
+<div id="item-container">
+    <p>Selected Items</p>
+    <p id="item-holder"></p>
+    <div id="list-container">
+        <ul id="list-holder"></ul>
+    </div>
+</div>
+</body>
+</html>

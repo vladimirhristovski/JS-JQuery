@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>Components</title>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<style type="text/css">
+        .row-selected{
+ 			background:lightblue;
+			}
+        </style>
+        <script type="text/javascript">
+			$(document).ready(function(){
+			
+				$( "#tabs" ).tabs({
+						beforeActivate: function( uevent, ui ) {
+							if(ui.newTab.index() == 1){
+								presmetajProgres();
+							}
+						}
+					});
+				
+				$(document).tooltip({
+					items: "#list1 li, #list2 li",
+					content: function(){
+						var el = $(this);
+						var poeni = el.attr("title1");
+						var indeks = el.attr("rel");
+						//$("#list1 li input").tooltip;
+						return "Poeni: " + poeni + " Indeks: " + indeks;
+					}
+				});
+			
+				$('#dodadiDesno').click(function() {  
+				  	if($('#list1 li input:checked').parent().attr("title1") > 50){
+						$('#list1 li input:checked').parent().remove().appendTo('#list2'); 
+						$('#list2 li input:checked').attr("checked",false);        				
+					}
+					else{
+						$('#list1 li input:checked').attr("checked",false);
+						alert('Избравте студент со помалку од 50 поени');	
+					}
+										
+				 });  
+				 $('#dodadiLevo').click(function() {  
+				 	$('#list2 li input:checked').parent().remove().appendTo('#list1'); 
+					$('#list1 li input:checked').attr("checked",false);
+        			
+				 });
+			 });	
+			$(function(){
+				$('input').click(function () {
+					$('input:not(:checked)').parent().removeClass("row-selected");
+					$('input:checked').parent().addClass("row-selected");
+				}); 
+				}); 			 
+			function presmetajProgres(){
+					var count = 0;
+					var count1 = $("#list1 li").size()
+					var sest = 0;
+					var sedum = 0;
+					var osum = 0;
+					var devet = 0;
+					var deset = 0;
+					$('#list2 li').each(function(index) {
+						count ++;
+						if($(this).attr("title1")>50 && $(this).attr("title1") <=60){
+							sest ++;
+						}
+						if($(this).attr("title1")>60 && $(this).attr("title1") <=70){
+							sedum ++;
+						}
+						if($(this).attr("title1")>70 && $(this).attr("title1") <=80){
+							osum ++;
+						}
+						if($(this).attr("title1")>80 && $(this).attr("title1") <=90){
+							devet ++;
+						}
+						if($(this).attr("title1")>90 && $(this).attr("title1") <=100){
+							deset ++;
+						}
+									
+					});
+					
+					sest = parseFloat(sest/(count+count1) * 100);
+					
+					$('#progressbar6').progressbar({
+						
+						value: sest
+					});
+					$("#progress6-value").text('Оценка 6: ' + sest.toPrecision(3) + '%');
+					
+					sedum = parseFloat(sedum/(count+count1) * 100);
+					$( "#progressbar7" ).progressbar({
+						value: sedum
+					});
+					$( "#progress7-value" ).text('Оценка 7: ' + sedum.toPrecision(3) + '%');
+					
+					osum = parseFloat(osum/(count+count1) * 100);
+					$( "#progressbar8" ).progressbar({
+						value: osum
+					})
+					$( "#progress8-value" ).text('Оценка 8: ' + osum.toPrecision(3) + '%');
+					
+					devet = parseFloat(devet/(count+count1) * 100);
+					$( "#progressbar9" ).progressbar({
+						value: devet
+					})
+					$( "#progress9-value" ).text('Оценка 9: ' + devet.toPrecision(3) + '%');
+					
+					deset = parseFloat(deset/(count+count1) * 100);
+					$( "#progressbar10" ).progressbar({
+						value: deset
+					})
+					$( "#progress10-value" ).text('Оценка 10: ' + deset.toPrecision(3) + '%');
+				}
+				
+				
+        </script>
+		<style>
+			.container{
+				float:left;
+				margin:20px;
+				padding: 20px;				
+			}
+			.container:nth-child(even){
+				border-left: 1px lightgray solid;			
+			}
+			#list1, #list2{
+				list-style-type: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+    <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Студенти</a></li>
+        <li><a href="#tabs-2">Оценки</a></li>
+        
+    </ul>
+    
+    <div id="tabs-1">
+    
+    	<div class="container" style="float:left">
+			<strong>Пред увид</strong>
+			<ul id="list1">
+				<li title1="30" rel="111113"><input type="checkbox"/>Петре Петревски </li>
+				<li title1="90" rel="111114"> <input type="checkbox"/>Аце Ацевски</li>
+				<li title1="100" rel="111115"> <input type="checkbox"/>Мите Митрески</li>
+                <li title1="85" rel="111117"> <input type="checkbox"/>Мирко Мирковски</li>
+			</ul>
+            
+		</div>
+		<div class="container" style="float:left">
+			<strong>Конечна листа на положени студенти</strong>
+			<ul id="list2">
+            	<li title1="80" rel="111111"><input type="checkbox"/>Никола Николовски </li>
+				<li title1="70" rel="111112"> <input type="checkbox"/>Симона Симоноска</li>
+				<li title1="60" rel="111116"> <input type="checkbox"/>Ристе Ристески</li>
+
+			</ul>
+		</div>
+		<div style="clear:both"></div>
+			<div style="margin-left:260px; float:left;"><input type="button" id="dodadiDesno" value=">>"/></div>
+            <div style="margin-left:20px;float:left;"><input type="button" id="dodadiLevo" value="<<"/></div>
+           <div style="clear:both"></div>
+    </div>
+		<div id="tabs-2">
+			<div id="progressbar6" style="width:400px;"></div><span id="progress6-value"></span>
+			<div id="progressbar7" style="width:400px;"></div><span id="progress7-value"></span>
+			<div id="progressbar8" style="width:400px;"></div><span id="progress8-value"></span>
+			<div id="progressbar9" style="width:400px;"></div><span id="progress9-value"></span>
+			<div id="progressbar10" style="width:400px;"></div><span id="progress10-value"></span>
+        </div>
+		</div>
+
+	</body>
+</html>

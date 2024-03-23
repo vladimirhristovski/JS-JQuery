@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L3Z1</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        .element{
+            display:inline-block;
+            width: 150px;
+            height: 150px;
+            border: 3px solid black;
+            margin: 15px;
+            text-align: center;
+            cursor: pointer;
+            line-height: 100px;
+            font-size: 27px;
+        }
+        .element:nth-child(even){
+            border: 3px solid red;
+        }
+        .active{
+            background: linear-gradient(#1E5799, #7db9e8);
+            color: white;
+        }
+        .hover{
+            background: yellowgreen;
+            color: royalblue;
+        }
+        .hit{
+            background: grey;
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".element").addClass("active")
+            $(".guess").hide()
+            var choose=0
+            var element1
+            var element2
+            var parent1
+            var parent2
+            var pogodoci=0
+
+            $(".element").hover(function () {
+                $(this).removeClass("active")
+                $(this).addClass("hover")
+            }, function () {
+                $(this).removeClass("hover")
+                $(this).addClass("active")
+            })
+
+            $(".element").click(function () {
+                if(pogodoci===9){
+                    return
+                }
+                if((!$(this).hasClass("hit"))&&($(this).find(".number").is(":visible"))) {
+                    $(this).find(".number").hide()
+                    $(this).find(".guess").show()
+                    choose++
+                    if (choose % 4 === 1) {
+                        element1 = $(this).find(".guess").html()
+                        parent1 = $(this)
+                    }
+                    if (choose % 4 === 2) {
+                        element2 = $(this).find(".guess").html()
+                        parent2 = $(this)
+                        if (element1 === element2) {
+                            parent1.removeClass("active").addClass("hit")
+                            parent2.removeClass("active").addClass("hit")
+                            choose = 0
+                            pogodoci++
+                            if(pogodoci===8){
+                                alert("Congratulations, you won!")
+                                pogodoci++
+                            }
+                        }
+                    }
+                    if (choose % 4 === 3) {
+                        parent1.find(".guess").hide()
+                        parent1.find(".number").show()
+                        parent2.find(".guess").hide()
+                        parent2.find(".number").show()
+                        choose = 0
+                        $(this).find(".number").show()
+                        $(this).find(".guess").hide()
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<h3>Меморија</h3>
+<div id="grid-container">
+    <div class="row">
+        <div class="element">
+            <p class="number">1</p>
+            <p class="guess">Mercedes</p>
+        </div><div class="element">
+            <p class="number">2</p>
+            <p class="guess">Ferrari</p>
+        </div><div class="element">
+            <p class="number">3</p>
+            <p class="guess">Red Bull</p>
+        </div><div class="element">
+            <p class="number">4</p>
+            <p class="guess">McLaren</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="element">
+            <p class="number">5</p>
+            <p class="guess">Aston Martin</p>
+        </div><div class="element">
+            <p class="number">6</p>
+            <p class="guess">Alpha Tauri</p>
+        </div><div class="element">
+            <p class="number">7</p>
+            <p class="guess">Williams</p>
+        </div><div class="element">
+            <p class="number">8</p>
+            <p class="guess">Mercedes</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="element">
+            <p class="number">9</p>
+            <p class="guess">Ferrari</p>
+        </div><div class="element">
+            <p class="number">10</p>
+            <p class="guess">Red Bull</p>
+        </div><div class="element">
+            <p class="number">11</p>
+            <p class="guess">McLaren</p>
+        </div><div class="element">
+            <p class="number">12</p>
+            <p class="guess">Aston Martin</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="element">
+            <p class="number">13</p>
+            <p class="guess">Alpha Tauri</p>
+        </div><div class="element">
+            <p class="number">14</p>
+            <p class="guess">Williams</p>
+        </div><div class="element">
+            <p class="number">15</p>
+            <p class="guess">Alfa Romeo</p>
+        </div><div class="element">
+            <p class="number">16</p>
+            <p class="guess">Alfa Romeo</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

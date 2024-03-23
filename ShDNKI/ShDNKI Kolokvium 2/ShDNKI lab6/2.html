@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L6Z2</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        #main-container {
+            display: inline-block;
+            width: 300px;
+            border: 1px solid black;
+            padding: 0 20px 30px 20px;
+            /*display: none;*/
+        }
+
+        #mainSent-container {
+            display: inline-block;
+            width: 320px;
+            height: 430px;
+            border: 1px solid black;
+            padding: 0 0 30px 20px;
+            display: none;
+        }
+
+        #mainDone-container {
+            display: inline-block;
+            width: 320px;
+            height: 430px;
+            border: 1px solid black;
+            padding: 0 10px 30px 10px;
+            text-align: center;
+            display: none;
+        }
+
+        #content-container {
+            display: inline-block;
+            width: 300px;
+            height: 100px;
+            background: palegreen;
+            margin-bottom: 10px;
+        }
+
+        #menu-container {
+            display: inline-block;
+            width: 300px;
+            background: lightskyblue;
+            margin-bottom: 15px;
+            padding: 10px 30px 10px 10px;
+            border: 1px solid black;
+        }
+
+        #footer-container {
+            display: inline-block;
+            width: 320px;
+            background: lightskyblue;
+            margin-top: 15px;
+            padding: 15px 10px 15px 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #mainDiv-container {
+            display: inline-block;
+            width: 300px;
+        }
+
+        #insert {
+            background: url("insertButton.png");
+            width: 100px;
+            height: 50px;
+            background-size: cover;
+        }
+
+        #send {
+            background: url("sendButton.png");
+            width: 100px;
+            height: 50px;
+            background-size: cover;
+        }
+
+        #email {
+            background: url("emailActive.png");
+            width: 70px;
+            height: 40px;
+            background-size: cover;
+            margin-right: 10px;
+        }
+
+        #sent {
+            background: url("sentPending.png");
+            width: 70px;
+            height: 40px;
+            background-size: cover;
+            margin-right: 10px;
+        }
+
+        #done {
+            background: url("donePending.png");
+            width: 70px;
+            height: 40px;
+            background-size: cover;
+            margin-right: 10px;
+        }
+
+        #previous {
+            background: url("previous.png");
+            width: 130px;
+            height: 30px;
+            background-size: cover;
+            margin-right: 10px;
+        }
+
+        #next {
+            background: url("next.png");
+            width: 130px;
+            height: 30px;
+            background-size: cover;
+        }
+
+        #delete {
+            background: url("delete.png");
+            width: 100px;
+            height: 50px;
+            background-size: cover;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        .ui-dialog-titlebar-close {
+            display: none;
+        }
+
+        .ui-dialog-titlebar {
+            background: darkgray;
+            border: 1px solid gray;
+            color: black;
+        }
+
+        h3 {
+            margin-bottom: 0;
+            margin-top: 0;
+            color: red;
+            display: none;
+        }
+
+        #passwordPrompt p:first-of-type {
+            margin-top: 0;
+        }
+
+        #content {
+            margin-bottom: 10px;
+            height: 100px;
+            width: 250px;
+            text-align: start;
+        }
+
+        #sent-mails {
+            width: 300px;
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+            margin: 0;
+        }
+
+        #sent-mails li {
+            border: 1px solid black;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
+
+        .selected {
+            background: orange;
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var password = ""
+            $("#passwordPrompt").dialog({
+                modal: true,
+                autoOpen: true,
+                buttons: [{
+                    text: "Ok",
+                    click: function () {
+                        var score = 0
+                        password = $("#emailPassword").val();
+                        var passwordRepeat = $("#repeatPassword").val();
+                        score += password === passwordRepeat ? 1 : 0;
+                        score += password.length >= 6 ? 1 : 0
+                        score += /[!@#$%^&*()_+]+/.test(password) ? 1 : 0
+                        console.log(password)
+                        console.log(score)
+                        if (score === 3) {
+                            $(this).dialog("close")
+                            $("#paasswordError").hide()
+                        } else {
+                            $("#paasswordError").show()
+                        }
+                    }
+                }]
+            })
+
+            $("#messagePrompt").dialog({
+                modal: true,
+                autoOpen: false
+            })
+
+            $("#passwordCheck").dialog({
+                modal: true,
+                autoOpen: false,
+                buttons: [{
+                    text: "Ok",
+                    click: function () {
+                        var score = 0
+                        var passwordCheck = $("#checkPassword").val();
+                        score += password === passwordCheck ? 1 : 0;
+                        console.log(password)
+                        console.log(score)
+                        if (score === 1) {
+                            var to = $("#toEmail").val()
+                            var subject = $("#subjectEmail").val()
+                            $("<li class='element'>").append("To: " + to + "<br>" + "Subject: " + subject).appendTo("#sent-mails")
+                            $("#toEmail").val("")
+                            $("#ccEmail").val("")
+                            $("#subjectEmail").val("")
+                            $("#content").val("")
+                            $("#contentEmail").html("")
+                            $(this).dialog("close")
+                            $("#paasswordCheckError").hide()
+                            $("#checkPassword").val("");
+                        } else {
+                            $("#paasswordCheckError").show()
+                        }
+                    }
+                }]
+            })
+
+            $("#insert").click(function () {
+                var to = $("#toEmail").val()
+                var cc = $("#ccEmail").val()
+                var subject = $("#subjectEmail").val()
+                if (to.length === 0 || cc.length === 0 || subject.length === 0) {
+                    alert("Fill in all the fields!")
+                    return;
+                }
+                $("#to").html(to)
+                $("#cc").html(cc)
+                $("#subject").html(subject)
+                $("#messagePrompt").dialog("open")
+            })
+
+            $("#insertMessage").click(function () {
+                var content = $("#content").val()
+                $("#contentEmail").html(content)
+                $("#messagePrompt").dialog("close")
+            })
+
+            $("#clear").click(function () {
+                $("#toEmail").val("")
+                $("#ccEmail").val("")
+                $("#subjectEmail").val("")
+                $("#content").val("")
+                $("#contentEmail").html("")
+                $("#messagePrompt").dialog("close")
+            })
+
+            $("#send").click(function () {
+                var to = $("#toEmail").val()
+                var cc = $("#ccEmail").val()
+                var subject = $("#subjectEmail").val()
+                if (to.length === 0 || cc.length === 0 || subject.length === 0) {
+                    alert("Fill in all the fields!")
+                    return;
+                }
+                $("#passwordCheck").dialog("open")
+            })
+
+            $("#sent-mails").on('click', 'li.element', function () {
+                $(this).toggleClass("selected")
+            })
+
+            $("#delete").click(function () {
+                $(".selected").remove()
+            })
+
+            $("#next").click(function () {
+                if($("#main-container").is(":visible")){
+                    $("#email").css({"background-image": "url(emailFinished.png)"});
+                    $("#sent").css({"background-image": "url(sentActive.png)"});
+                    $("#main-container").hide();
+                    $("#mainSent-container").show();
+                }else if($("#mainSent-container").is(":visible")){
+                    $("#sent").css({"background-image": "url(sentFinished.png)"});
+                    $("#done").css({"background-image": "url(doneActive.png)"});
+                    $("#mainSent-container").hide();
+                    $("#mainDone-container").show();
+                }
+            })
+
+            $("#previous").click(function () {
+                if($("#mainDone-container").is(":visible")){
+                    $("#done").css({"background-image": "url(donePending.png)"});
+                    $("#sent").css({"background-image": "url(sentActive.png)"});
+                    $("#mainDone-container").hide();
+                    $("#mainSent-container").show();
+                }else if($("#mainSent-container").is(":visible")){
+                    $("#sent").css({"background-image": "url(sentPending.png)"});
+                    $("#email").css({"background-image": "url(emailActive.png)"});
+                    $("#mainSent-container").hide();
+                    $("#main-container").show();
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="passwordPrompt" title="Set your password">
+    <h3 id="paasswordError">Passwords error!</h3>
+    <p>New Password:</p>
+    <input type="password" id="emailPassword">
+    <p>Repeat Password:</p>
+    <input type="password" id="repeatPassword">
+</div>
+
+<div id="messagePrompt" title="Message Content">
+    <p>To: <span id="to"></span></p>
+    <p>Subject: <span id="subject"></span></p>
+    <p>Cc: <span id="cc"></span></p>
+    <br>
+    <p>Content:</p>
+    <textarea id="content"></textarea>
+    <section>
+        <button id="insertMessage">Insert</button>
+        <button id="clear">Clear</button>
+    </section>
+</div>
+
+<div id="passwordCheck" title="Password">
+    <h3 id="paasswordCheckError">Passwords error!</h3>
+    <p>Password:</p>
+    <input type="password" id="checkPassword">
+</div>
+
+<div id="mainDiv-container">
+
+    <div id="menu-container">
+        <button id="email"></button>
+        <button id="sent"></button>
+        <button id="done"></button>
+    </div>
+
+    <div id="main-container">
+        <h1>New message:</h1>
+        <p>To:</p>
+        <input id="toEmail" type="text">
+        <p>Cc:</p>
+        <input id="ccEmail" type="text">
+        <p>Subject:</p>
+        <input id="subjectEmail" type="text">
+        <p>Content:</p>
+        <div id="content-container">
+            <span id="contentEmail"></span>
+        </div>
+        <section>
+            <button id="insert"></button>
+            <button id="send"></button>
+        </section>
+    </div>
+
+    <div id="mainSent-container">
+        <h1>Sent Items:</h1>
+        <ul id="sent-mails">
+
+        </ul>
+        <section>
+            <button id="delete"></button>
+        </section>
+    </div>
+
+    <div id="mainDone-container">
+        <h1>DONE</h1>
+    </div>
+
+    <div id="footer-container">
+        <button id="previous"></button>
+        <button id="next"></button>
+    </div>
+
+</div>
+</body>
+</html>

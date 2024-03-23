@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>L1Z1</title>
+    <meta charset="UTF-8">
+    <style>
+        h1,p{
+            text-align: center;
+        }
+        p{
+            font-size: 30px;
+        }
+        .green{
+            color: green;
+        }
+        .yellow{
+            color: yellow;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Преостанато време за изработка :</h1>
+<p id="timer"></p>
+<script>
+    function timer() {
+        var hours=23-new Date().getHours();
+        var minutes=59-new Date().getMinutes();
+        var seconds=59-new Date().getSeconds();
+        if(hours<10){
+            hours="0"+hours;
+        }
+        if(minutes<10){
+            minutes="0"+minutes;
+        }
+        if(seconds<10){
+            seconds="0"+seconds;
+        }
+        if(hours>=16){
+            document.getElementById("timer").style.color="green";
+        }
+         else if(hours>=8){
+            document.getElementById("timer").style.color="orange";
+        }
+        else{
+            document.getElementById("timer").style.color="red";
+        }
+        document.getElementById("timer").innerHTML=hours+":"+minutes+":"+seconds;
+
+    }
+    timer();
+    setInterval(timer,1000);
+
+</script>
+</body>
+</html>

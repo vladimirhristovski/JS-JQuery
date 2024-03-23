@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <style>
+
+    </style>
+    <script>
+        var snowflakes = [];
+        window.onload = function () {
+            for (let i = 1; i < 6; i++) {
+                var pic = document.createElement("img");
+                pic.setAttribute("src", "s" + i + ".png");
+                pic.style.width = "100px";
+                pic.style.height = "100px";
+                pic.style.position = "absolute";
+                snowflakes.push(pic);
+                document.body.append(pic);
+                change(pic);
+            }
+        }
+
+        function change(snowflake) {
+            snowflake.style.left = Math.floor(Math.random() * 1000) + "px";
+            anime({
+                targets: snowflake,
+                top: [-10, 1000],
+                left: Math.floor(Math.random() * 1000) + "px",
+                right: Math.floor(Math.random() * 1000) + "px",
+                duration: Math.floor(Math.random() * 5000 + 5000),
+                easing: "linear",
+                // loop:true
+                complete: function () {
+                    change(snowflake)
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

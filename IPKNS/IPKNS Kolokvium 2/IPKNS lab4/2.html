@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L4Z2</title>
+  <style>
+      select{
+          width: 158px;
+      }
+      input{
+          margin-bottom: 10px;
+          display: inline-block;
+      }
+      #input-container{
+          display: inline-block;
+          width: 203px;
+          justify-content: end;
+          text-align: end;
+          margin: 0;
+      }
+      button{
+          margin-top: 10px;
+      }
+  </style>
+  <script>
+      function reset() {
+          document.getElementById('items').value=''
+          document.getElementById('input-type').value=''
+      }
+      function send() {
+          var items = document.getElementById('items').value
+          var inputType = document.getElementById('input-type').value
+          if(items.length===0||inputType.length===0){
+              alert("Сите полиња се задолжителни!")
+              return
+          }
+          var content=document.getElementById("content-container")
+          content.innerHTML=""
+          items=items.replaceAll(" ","").split(",")
+          items.forEach(function (item) {
+              if(inputType==="Radio button"){
+                  content.innerHTML+=('<input type="radio" name="itemNo">'+item)
+              }
+              if(inputType==="Check box"){
+                  content.innerHTML+=('<input type="checkbox">'+item)
+              }
+          })
+      }
+  </script>
+</head>
+<body onload="reset()">
+<div id="input-container">
+<label>Items:</label>
+<input id="items" type="text">
+<label>Type:</label>
+<select id="input-type">
+    <option>Radio button</option>
+    <option>Check box</option>
+</select>
+    <section>
+        <button onclick="send()">Прикажи</button>
+    </section>
+</div>
+
+<div id="content-container">
+
+</div>
+</body>
+</html>

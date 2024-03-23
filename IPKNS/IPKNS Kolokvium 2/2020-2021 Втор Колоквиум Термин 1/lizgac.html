@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+</head>
+<body>
+<button onclick="toTheLeft()"><</button>
+<button onclick="toTheRight()">></button>
+<script>
+  let jsonDATA = '[{"background-color":"red", "width":"100px", "height":"100px"}, {"background-color":"green", "width":"50px", "height":"100px"}, {"background-color":"blue", "width":"100px", "height":"50px"}]';
+  jsonDATA=JSON.parse(jsonDATA);
+  console.log(jsonDATA)
+  let position = 0
+  let animationInProgress = false
+  function incrementPosition(){
+    position +=1
+    position %= jsonDATA.length
+  }
+  window.onload=function main(){
+    document.body.append(createDiv(jsonDATA[0]));
+
+  }
+  function createDiv(obj){
+    console.log(true)
+    let newD = document.createElement("div")
+    newD.style.background = obj["background-color"];
+    newD.style.width = obj.width;
+    newD.style.height = obj.height;
+    newD.style.position = "absolute"
+    newD.style.top = "35px"
+    newD.setAttribute("id","current")
+    return newD
+  }
+  function toTheLeft(){
+    if(animationInProgress)return
+    animationInProgress = true
+    let curr = document.getElementById("current")
+    anime({
+      targets:curr,
+      duration:200,
+      easing:"linear",
+      left:-100,
+      complete:function (){
+        curr.remove()
+        incrementPosition()
+        let newOBJ = createDiv(jsonDATA[position])
+        newOBJ.style.left = "1000px"
+        document.body.append(newOBJ);
+        anime({
+          targets:newOBJ,
+          duration:2000,
+          easing:"linear",
+          left:10,
+          complete:function (){
+            animationInProgress = false
+          }
+        })
+      }
+    })
+  }
+  function toTheRight(){
+    if(animationInProgress)return
+    animationInProgress = true
+    let curr = document.getElementById("current")
+    anime({
+      targets:curr,
+      duration:2000,
+      easing:"linear",
+      left:1000,
+      complete:function (){
+        curr.remove()
+        incrementPosition()
+        let newOBJ = createDiv(jsonDATA[position])
+        newOBJ.style.left = "-100px"
+        document.body.append(newOBJ);
+        anime({
+          targets:newOBJ,
+          duration:200,
+          easing:"linear",
+          left:10,
+          complete:function (){
+            animationInProgress = false
+          }
+        })
+      }
+    })
+  }
+
+</script>
+</body>
+</html>

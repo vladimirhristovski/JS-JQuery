@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z2</title>
+    <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+    <script src="../../jquery/jquery.js"></script>
+    <script src="../../jquery/jquery-ui.js"></script>
+    <style>
+        #names-container {
+            display: inline-block;
+            width: 100px;
+            text-align: left;
+        }
+
+        #input-container {
+            display: inline-block;
+            width: 158px;
+        }
+
+        #names-container p {
+            margin: 5px;
+        }
+
+        #hobbies .ui-selected {
+            background: #F39814;
+            color: white;
+        }
+
+        #hobbies {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 50%;
+        }
+
+        #hobbies li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.1em;
+            height: 12px;
+            border: 1px solid black;
+            padding-bottom: 15px
+        }
+
+        #names-container p {
+            margin-bottom: 9px;
+        }
+
+        #input-container input {
+            margin-bottom: 5px;
+            display: inline-block;
+            width: 200px;
+        }
+
+        #input-container label {
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        #input-container {
+            width: 400px;
+        }
+
+        .ui-dialog-titlebar {
+            background: darkgray;
+            border: 1px solid grey;
+
+        }
+
+        .ui-dialog-content {
+            color: black;
+        }
+
+        .ui-dialog {
+            background: white;
+            border: 1px solid grey;
+
+        }
+
+        .ui-state-default {
+            border: 1px solid grey;
+
+        }
+
+        #hobbies li {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $("#dateOfBirth").datepicker({
+                changeMonth: true,
+                changeYear: true
+            })
+            $("#hobbies li").disableSelection();
+
+            $("#hobbies li").click(function () {
+                $(this).toggleClass("ui-selected");
+            })
+            $("#add").click(function () {
+                $("#hobbies li").css("border", "1px solid black")
+                var name = $("#name").val()
+                var surname = $("#surname").val()
+                var password = $("#password").val()
+                var dateOfBirth = $("#dateOfBirth").val()
+                if (name.length === 0 || surname.length === 0 || password.length === 0 || dateOfBirth.length === 0) {
+                    $("#input-container input").css("border", "2px solid red")
+                    $("#input-container label").each(function () {
+                        if ($(this).attr("class") === "date") {
+                            $(this).text("Select a " + $(this).attr("class")).css("color", "red")
+                        } else {
+                            $(this).text("Insert a " + $(this).attr("class")).css("color", "red")
+                        }
+                    })
+                    return
+                    // label.each(label1=>label1.text(" Insert "+label1.attr("class")).css("color","red"))
+                }
+                $("#input-container input").css("border", "")
+                $("#input-container label").each(function () {
+                    $(this).text("").css("color", "")
+                })
+                $("#hobby-holder").text("")
+                $(".ui-selected").each(function () {
+                    if ($(".ui-selected").last()[0].innerHTML === $(this)[0].innerHTML) {
+                        $("#hobby-holder").append($(this)[0].innerHTML)
+                    } else {
+                        $("#hobby-holder").append($(this)[0].innerHTML + ", ")
+                    }
+                    console.log($(this))
+                })
+                if ($(".ui-selected").length === 0) {
+                    $("#hobby-holder").append("No hobbies")
+                }
+                $("#name-holder").text(name)
+                $("#surname-holder").text(surname)
+                $("#password-holder").text(password)
+                $("#dateOfBirth-holder").text(dateOfBirth)
+                $("#info").dialog("open")
+            })
+            $("#info").dialog({
+                modal: true,
+                autoOpen: false,
+                width: "281px"
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="info-container">
+    <div id="names-container">
+        <p>Name:</p>
+        <p>Surname:</p>
+        <p>Password:</p>
+        <p>DateOfBirth:</p>
+    </div>
+    <div id="input-container">
+        <input type="text" id="name" placeholder="Name..."><label class="name"></label>
+        <input type="text" id="surname" placeholder="Surname..."><label class="surname"></label>
+        <input type="password" id="password" placeholder="Password"><label class="password"></label>
+        <input type="text" id="dateOfBirth" placeholder="Date Of Birth"><label class="date"></label>
+    </div>
+    <br>
+    <br>
+    <div id="hobby-container">
+        <p>Select your hobbies:</p>
+        <ul id="hobbies">
+            <li>Gaming</li>
+            <li>Sports</li>
+            <li>Watching TV</li>
+            <li>Sleeping</li>
+            <li>Hiking</li>
+            <li>Skiing</li>
+            <li>Dancing</li>
+        </ul>
+        <br>
+        <br>
+        <section>
+            <button id="add">Add my info</button>
+        </section>
+    </div>
+</div>
+<div id="info" title="User info">
+    <p>Name:<span id="name-holder"></span></p>
+    <p>Surnae:<span id="surname-holder"></span></p>
+    <p>Password:<span id="password-holder"></span></p>
+    <p>DateOfBirth:<span id="dateOfBirth-holder"></span></p>
+    <p>Hobbies:<span id="hobby-holder"></span></p>
+
+</div>
+</body>
+</html>

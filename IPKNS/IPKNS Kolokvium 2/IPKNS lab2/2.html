@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z2</title>
+  <style>
+    img{
+      display: none;
+    }
+  </style>
+  <script>
+    var randomImg
+    var images=document.getElementsByTagName("img")
+    function show() {
+      var prev=randomImg
+      randomImg=Math.floor(Math.random()*3)+1
+      if(prev===randomImg){
+        show()
+      }
+      for (let i = 0; i < images.length; i++) {
+        images[i].style.display="none"
+      }
+      document.getElementById(randomImg).style.display="inline-block"
+    }
+  </script>
+</head>
+<body>
+<button onclick="show()">Show photo</button>
+<br><br>
+<img id="1" src="https://designmodo.com/wp-content/uploads/2014/07/free-photos.jpg">
+<img id="2" src="https://farm5.staticflickr.com/4060/4567292488_5d3f4b05f6_z.jpg">
+<img id="3" src="https://wallup.net/wp-content/uploads/2017/03/28/401266-landscape-road-forest-748x421.jpg">
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z3</title>
+  <style>
+
+  </style>
+  <script>
+    function change() {
+      document.getElementsByTagName("body")[0].style.fontFamily="Arial"
+      document.getElementById("name").textContent="Владимир"
+      document.getElementById("index").textContent="223030"
+      document.getElementById("hometown").textContent="Битола"
+      document.querySelectorAll("li").forEach(listItem=>{listItem.style.backgroundColor="red";listItem.style.width="150px"});
+        // for (var i = 0; i < listItems.length; i++) {
+        //     listItems[i].style.backgroundColor = "red";
+        //     listItems[i].style.width = "150px";
+        // }
+    }
+  </script>
+</head>
+<body onload="change()">
+<h1>About Me</h1>
+ИНТЕРНЕТ ПРОГРАМИРАЊЕ
+<ul>
+  <li>Name: <span id="name"></span>
+  <li>Index: <span id="index"></span>
+  <li>Hometown: <span id="hometown"></span>
+</ul>
+</body>
+</html>

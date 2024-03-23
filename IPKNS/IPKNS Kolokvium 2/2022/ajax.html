@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <style>
+
+    </style>
+    <script>
+        var url = "http://ergast.com/api/f1/2022/drivers.json";
+        window.onload=function () {
+            get();
+        }
+        async function get(){
+            const response = await fetch(url);
+            const drivers=await response.json();
+            var driversList=drivers.MRData.DriverTable.Drivers;
+            driversList.forEach(driver=>console.log(driver.driverId));
+            console.log(driversList);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

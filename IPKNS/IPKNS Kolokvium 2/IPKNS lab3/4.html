@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L3Z4</title>
+  <style>
+
+  </style>
+  <script>
+    class Book{
+      constructor(title,author,alreadyRead) {
+        this.title=title;
+        this.author=author;
+        this.alreadyRead=alreadyRead;
+      }
+      print(){
+        let str=""
+        return str.concat(this.alreadyRead?"'You already read ":"'You still need to read ").concat(`"${this.title}" `).concat("by "+this.author+".'")
+      }
+    }
+    class Library{
+      constructor(books) {
+        this.books=books
+      }
+      printBooks(){
+        this.books.forEach(book=>console.log(book.print()))
+      }
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

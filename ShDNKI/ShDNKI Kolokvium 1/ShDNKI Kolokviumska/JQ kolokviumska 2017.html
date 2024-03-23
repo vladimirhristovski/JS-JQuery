@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>K17</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style>
+    .container{
+      padding-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    #list{
+      text-align: center;
+    }
+    #list li{
+      display: inline-block;
+      padding: 5px 20px 5px 20px;
+      cursor: pointer;
+    }
+    .element{
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      vertical-align: top;
+    }
+    img{
+      max-width: 100%;
+      max-height: 80%;
+    }
+    .mother,.subElement{
+      display: none;
+      margin-left: 20px;
+    }
+    #modul h3{
+      border: 1px solid black;
+      width: 150px;
+    }
+    .row{
+      padding-bottom: 50px;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $(".grid").hide()
+      $(".button").hide()
+      $("#list li").click(function () {
+        $(".grid").hide()
+        var id=$(this).attr("id")
+        $("#grid_"+id).show()
+      })
+      $(".element").hover(function () {
+        $(this).find(".button").show()
+      }, function () {
+        $(this).find(".button").hide()
+      })
+      $("#modul h3, .mother h3").click( function () {
+        $(this).next().slideToggle(200)
+      })
+    })
+  </script>
+</head>
+<body>
+<div id="points">
+  <ul id="list">
+    <li id="1">Compact Digital Cameras</li>
+    <li id="2">DSLR Cameras</li>
+    <li id="3">Speedlite Flashes</li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid_1">
+    <div class="row">
+      <div class="element">
+        <p>PowerShot G3 X</p>
+        <img src="CompactDigitalCameras/PowerShot%20G3%20X.png">
+        <section>
+        <button class="button">Add to cart</button>
+        <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot G5 X</p>
+        <img src="CompactDigitalCameras/PowerShot%20G5%20X.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot G7 X</p>
+        <img src="CompactDigitalCameras/PowerShot%20G7%20X.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot G9 X</p>
+        <img src="CompactDigitalCameras/PowerShot%20G9%20X.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="element">
+        <p>PowerShot SX420 IS</p>
+        <img src="CompactDigitalCameras/PowerShot%20SX420%20IS.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot SX530 HS</p>
+        <img src="CompactDigitalCameras/PowerShot%20SX%20530%20HS.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot SX540 HS</p>
+        <img src="CompactDigitalCameras/PowerShot%20SX540%20HS.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>PowerShot SX720 HS</p>
+        <img src="CompactDigitalCameras/PowerShot%20SX720%20HS.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid_2">
+    <div class="row">
+      <div class="element">
+        <p>Canon-EOS-5D-Mark-III</p>
+        <img src="DSLRCameras/Canon-EOS-5D-Mark-III.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>EOS 5DS</p>
+        <img src="DSLRCameras/EOS%205DS.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>EOS 5DS R</p>
+        <img src="DSLRCameras/EOS%205DS%20R.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="element">
+        <p>EOS 7D Mark II</p>
+        <img src="DSLRCameras/EOS%207D%20Mark%20II.jpg">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>EOS 80D</p>
+        <img src="DSLRCameras/EOS%2080D.jpg">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <p>EOS 700D</p>
+        <img src="DSLRCameras/EOS%20700D.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="element">
+          <p>EOS 760D</p>
+          <img src="DSLRCameras/EOS%20760D.png">
+          <section>
+            <button class="button">Add to cart</button>
+            <button class="button">Rate</button>
+          </section>
+        </div>
+        <div class="element">
+          <p>EOS 1300D</p>
+          <img src="DSLRCameras/EOS%201300D.png">
+          <section>
+            <button class="button">Add to cart</button>
+            <button class="button">Rate</button>
+          </section>
+        </div>
+        <div class="element">
+          <p>EOS 6D</p>
+          <img src="DSLRCameras/EOS_6D.jpg">
+          <section>
+            <button class="button">Add to cart</button>
+            <button class="button">Rate</button>
+          </section>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid_3">
+    <div class="row">
+      <div class="element">
+        <img src="Flashes/1.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <img src="Flashes/2.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+      <div class="element">
+        <img src="Flashes/3.png">
+        <section>
+          <button class="button">Add to cart</button>
+          <button class="button">Rate</button>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="modul">
+    <h3>Services & Apps</h3>
+    <div class="mother">
+      <h3>Services</h3>
+      <div class="subElement">
+        <ul>
+          <li>irista</li>
+          <li>Lifecake</li>
+          <li>Photo Books</li>
+        </ul>
+      </div>
+      <h3>Apps</h3>
+      <div class="subElement">
+        <ul>
+          <li>Camera Connect</li>
+          <li>EOS Remote</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Get Inspired</h3>
+      <div class="subElement">
+        <ul>
+          <li>Stories</li>
+          <li>Techniques</li>
+          <li>Canon Connectivity</li>
+          <li>Showcase</li>
+          <li>Gallery</li>
+        </ul>
+      </div>
+    <h3>Support</h3>
+      <div class="subElement">
+        <ul>
+          <li>Drivers</li>
+          <li>Software</li>
+          <li>Manuals</li>
+          <li>FAQs</li>
+        </ul>
+      </div>
+  </div>
+</body>
+</html>

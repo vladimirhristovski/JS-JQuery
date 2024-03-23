@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L4Z2</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style>
+
+  </style>
+  <script>
+      $(document).ready(function () {
+
+          $("#date").datepicker({
+              defaultDate:new Date(),
+              changeMonth: true,
+              changeYear: true,
+              beforeShowDay: function (date) {
+                  var disabled=true,// date enabled by default
+                      // get the number of days in current month
+                  numOfDays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+                  if (numOfDays % 2 === 0) {
+                      disabled = (date.getDate() % 2 !== 0) // for even-days months, disable the even dates
+                  }
+                  else {
+                      disabled = (date.getDate() % 2 === 0) //for odd - days months, disable the odd dates
+                  }
+                  return [disabled, ""]
+              }
+          })
+      })
+  </script>
+</head>
+<body>
+<label>Choose date: </label>
+<input id="date">
+</body>
+</html>

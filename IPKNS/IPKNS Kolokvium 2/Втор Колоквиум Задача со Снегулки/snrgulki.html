@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script>
+    window.onload = function () {
+      let imgs = document.getElementsByTagName("img")
+      for (let i = 0; i < imgs.length; i++) {
+        imgs[i].style.width = "100px"
+        imgs[i].style.height = "100px"
+        imgs[i].style.position = "absolute"
+        imgs[i].style.top = "0px"
+        effect(imgs[i])
+      }
+
+    }
+    function effect(snegulka){
+      snegulka.style.left = Math.random()*1000+"px";
+      anime({
+        targets:snegulka,
+        top:[-10,1000],
+        duration:Math.random()*5000+2000,
+        easing:"linear",
+        complete:function (){
+          effect(snegulka)
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+<img src="s1.png"/>
+<img src="s2.png"/>
+<img src="s3.png"/>
+<img src="s4.png"/>
+<img src="s5.png"/>
+<img src="s6.png"/>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+    </style>
+
+    <script>
+        window.onload = function (){
+            imgs = document.getElementsByTagName('img')
+            for(let i=0;i<imgs.length;i++)
+            {
+                imgs[i].style.position = "absolute"
+                imgs[i].style.height = "70px"
+                imgs[i].style.width = "70px"
+                imgs[i].style.top = "-200px"
+                imgs[i].style.left = Math.random()*1000 + "px"
+                snow = setInterval(fail,Math.random()*10,imgs[i])
+            }
+        }
+
+        function fail(element)
+        {
+            let pos = Number(element.style.top.split("px")[0])
+            element.style.top = pos + 1 + "px"
+            console.log(pos)
+            if(pos>1000)
+            {
+                element.style.top = "-200px"
+                element.style.left = Math.random()*1000
+            }
+        }
+    </script>
+</head>
+<body>
+<img src="s1.png">
+<img src="s2.png">
+<img src="s3.png">
+<img src="s4.png">
+<img src="s5.png">
+<img src="s6.png">
+</body>
+</html>

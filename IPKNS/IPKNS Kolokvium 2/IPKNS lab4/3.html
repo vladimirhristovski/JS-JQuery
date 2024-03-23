@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L4Z3</title>
+  <style>
+      select{
+          width: 158px;
+      }
+      input{
+          margin-bottom: 10px;
+          display: inline-block;
+      }
+      #inputContainer{
+          display: inline-block;
+          width: 199px;
+          justify-content: end;
+          text-align: end;
+          margin: 0;
+      }
+      button{
+          margin-top: 10px;
+      }
+  </style>
+  <script>
+      function reset() {
+          document.getElementById('value').value=''
+          var items = document.querySelectorAll('input[name="type"]')
+          var selected
+          for(var select of items){
+              if(select.checked){
+                  select.checked=false
+              }
+          }
+      }
+      function isColor(strColor){
+          var s = new Option().style;
+          s.color = strColor;
+          return s.color == strColor;
+      }
+      function isImage(url) {
+          return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+      }
+      function send() {
+          var items = document.querySelectorAll('input[name="type"]')
+          var selected
+          for(var select of items){
+              if(select.checked){
+                  selected=select.value
+                  break
+              }
+          }
+          var value = document.getElementById('value').value
+          if(selected===undefined||value.length===0){
+              alert("Сите полиња се задолжителни!")
+              return;
+          }
+          console.log(isColor(value))
+          console.log(isImage(value))
+          if(selected==="color") {
+              if (isColor(value)) {
+                  document.body.style.background = value
+              }
+              else {
+                  alert("Not a valid color")
+              }
+          }else if(selected==="background") {
+              if(isImage(value)) {
+                  document.body.style.background = "url('"+value+"')"
+              }else {
+                  alert("Not a valid image")
+              }
+          }
+      }
+  </script>
+</head>
+<body onload="reset()">
+<h1>Промена на позадина</h1>
+<div id="inputContainer">
+    <section>
+<input type="radio" name="type" value="color"><label>Color</label>
+<input type="radio" name="type" value="background"><label>Image</label>
+    </section>
+    <label>Value:</label><input type="text" id="value">
+    <section>
+        <button onclick="send()">Промени</button>
+    </section>
+</div>
+</body>
+</html>

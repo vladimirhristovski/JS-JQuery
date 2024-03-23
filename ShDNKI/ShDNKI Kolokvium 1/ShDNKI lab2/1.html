@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z1</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style>
+    .active{
+      background: darkseagreen;
+    }
+    .notActive{
+      background: lightyellow;
+    }
+    #mainTab{
+      width: 570px;
+      background: orange;
+      border: 1px solid grey;
+    }
+    #tabs li{
+      display: inline-block;
+      padding: 5px 70px 5px 10px;
+      border: 1px solid black;
+      margin-left: 20px;
+    }
+    #tabs li:first-child{
+      margin-left: -20px;
+    }
+    #mainTab p{
+      padding-left: 50px;
+    }
+    .tab{
+      width: 570px;
+      background: lightskyblue;
+      border: 1px solid black;
+    }
+    .tab p{
+      margin:0;
+      padding: 0 10px 10px 10px;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $(".tab").hide()
+      $(".button").addClass("notActive")
+      $(".button").click(function () {
+        $(".tab").hide()
+        $(".button").addClass("notActive")
+        var id=$(this).attr("id")
+        $("#tab_"+id).show()
+        $(this).removeClass("notActive")
+        $(this).addClass("active")
+      })
+    })
+  </script>
+</head>
+<body>
+<div id="mainTab">
+  <p>Custom tab</p>
+  <ul id="tabs">
+    <li id="1" class="button">Open Start</li>
+    <li id="2" class="button">Connect</li>
+    <li id="3" class="button">Pin apps</li>
+  </ul>
+</div>
+<div id="tab_1" class="tab">
+  <p>Some text about Open Start . . . </p>
+</div>
+<div id="tab_2" class="tab">
+  <p>Some text about Connect . . . </p>
+</div>
+<div id="tab_3" class="tab">
+  <p>You can pin apps, websites, people, and folders to Start to easily get to what you use most. Tiles and notifications show what's new so you can get important info and updates at a glance. From Start, you don't have to bring up the charms to begin a search start typing to search for what you want. You can choose results from your apps, files, PC settings, and Bing. To see a list of all apps on your PC from Start, slide up from the middle of the screen or use the mouse to click the down arrow in the bottom left corner. To pin an app to Start select the app by pressing and holding or right clicking the tile, then tap or click Pin to Start. To customize Start, swipe up from the bottom edge and tap Customize. (If you're using a mouse, right-click anywhere on the screen and click Customize.) From here you can organize the Start screen however you like by moving tiles around, changing tile sizes, and naming groups of tiles.</p>
+</div>
+</body>
+</html>

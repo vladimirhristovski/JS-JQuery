@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Movies</title>
+	<link rel="stylesheet" href="../jquery/jquery-ui.css">
+	<script src="../jquery/jquery.js"></script>
+	<script src="../jquery/jquery-ui.js"></script>
+	<script>
+	// the api requires an api key, so it can be used
+	// you can get an api key for free here http://www.omdbapi.com/apikey.aspx
+	var apikey = "a6592a8d";
+
+	function liMouseOver() {
+				$("li").hover(function(){
+					$(this).css("cursor","pointer");
+				},function(){
+					$(this).css("cursor","none");
+				});
+	}
+	
+	function getMovie(title){
+		// $('#entries').html("<img src='animate.gif'>");
+		$.ajax({
+			url: "http://omdbapi.com/?t=" + title + "&apikey=" + apikey,
+			dataType: "json",
+			success: function (data) {
+				var title = data.Title;
+				// alert(data);
+				var rating = data.imdbRating;
+				var imdbID = data.imdbID;
+				var director = data.Director;
+				var actors = data.Actors;
+				var img = data.Poster;
+				$("#lblTitle").html(title);
+				$("#lblRating").html(rating);
+				$("#lblImdbID").html(imdbID);
+				$("#lblActors").html(actors);
+				$("#lblDirector").html(title);
+				$("#imgPoster").attr('src',img);
+			}					
+		});
+	}
+	function addMovie() {
+		var title = $("#txtTitle").val();
+		$("#selectable").append("<li class=\"ui-widget-content ui-selectee\" title=\""+title+"\">"+title+"</li>");
+	}
+	
+	$(document).ready(function(){
+		liMouseOver();
+		$("#bntAdd").click(function(){
+			$( "#dialog-message" ).dialog('open');	
+		});
+		
+	});
+	
+	$(function() {
+		$( "#selectable" ).selectable({
+			stop: function() {
+				var title = $('#selectable .ui-selected').attr('title');
+				getMovie(title);
+			}
+		});
+	});
+	$(function() {
+		$( "#dialog-message" ).dialog({
+			modal: true,
+			autoOpen: false,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+					addMovie();
+					liMouseOver();
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+  });
+	
+	</script>        
+	<style>
+	#feedback { font-size: 1.4em; }
+	#selectable .ui-selecting { background: #FECA40; }
+	#selectable .ui-selected { background: #F39814; color: white; }
+	#selectable { list-style-type: none; margin: 0; padding: 0; width: 50%; }
+	#selectable li { margin: 3px; padding: 0.4em; font-size: 1.1em; height: 12px; }
+	</style>	
+</head>
+
+<body>
+	<div id='movies'>
+		<input id="bntAdd" type="button" value="Add movie"/>
+		<ol id="selectable" class="ui-selectable">
+			<li class="ui-widget-content ui-selectee" title="Oblivion">Oblivion</li>
+			<li class="ui-widget-content ui-selectee" title="Elysium">Elysium</li>
+			<li class="ui-widget-content ui-selectee" title="Avatar">Avatar</li>
+			<li class="ui-widget-content ui-selectee" title="Inception">Inception</li>
+		</ol>
+	</div>
+	<div id='entries'>
+		<label style="font-weight:bold;">Title :</label> <label id="lblTitle"></label> <br/>
+		<label style="font-weight:bold;">ImdbID :</label> <label id="lblImdbID"></label> <br/>
+		<label style="font-weight:bold;">Rating :</label> <label id="lblRating"></label> <br/>
+		<label style="font-weight:bold;">Director :</label> <label id="lblDirector"></label> <br/>
+		<label style="font-weight:bold;">Actors :</label> <label id="lblActors"></label> <br/>
+		<img id="imgPoster" src=""/>
+	</div>
+
+	<div id="dialog-message" title="Download complete">
+		<p>
+			Enter title of the movie.
+			<input id="txtTitle" type="text"/>
+		</p>
+	</div>
+</body>
+</html>

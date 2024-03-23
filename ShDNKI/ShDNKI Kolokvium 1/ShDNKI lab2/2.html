@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L2Z2</title>
+  <link rel="stylesheet" href="../../jquery/jquery-ui.css">
+  <script src="../../jquery/jquery.js"></script>
+  <script src="../../jquery/jquery-ui.js"></script>
+  <style>
+      .hover{
+          background: lightyellow;
+      }
+      .active{
+          background: lightgreen;
+      }
+      .select{
+          display: inline-block;
+          margin-right: 20px;
+          padding: 10px 30px 10px 30px;
+      }
+      #bar{
+          text-align: center;
+          background: lightskyblue;
+          padding: 5px 0 5px 0;
+          margin: 0;
+      }
+      h3{
+          text-align: center;
+      }
+  </style>
+  <script>
+      $(document).ready(function () {
+          $(".tab").hide()
+          $(".select").click(function () {
+              $(".tab").hide()
+              $(".select").removeClass("active")
+              var id=$(this).attr("id")
+              $("#tab_"+id).show()
+              $(this).addClass("active")
+          })
+          $(".select").hover(function () {
+              $(this).addClass("hover")
+          }, function () {
+              $(this).removeClass("hover")
+          })
+
+          })
+  </script>
+</head>
+<body>
+<div id="navbar">
+    <ul id="bar">
+        <li id="1" class="select">food-and-drink</li>
+        <li id="2" class="select">electronics</li>
+        <li id="3" class="select">home-and-garden</li>
+        <li id="4" class="select">about us</li>
+        <li id="5" class="select">contact</li>
+    </ul>
+</div>
+<h3>Hypermarket</h3>
+<div id="tab_1" class="tab">
+    <p>Some text about food-and-drink . . . </p>
+</div>
+<div id="tab_2" class="tab">
+    <p>Some text about electronics . . . </p>
+</div>
+<div id="tab_3" class="tab">
+    <p>Some text about home-and-garden . . . </p>
+</div>
+<div id="tab_4" class="tab">
+    <p>Some text about about us . . . </p>
+</div>
+<div id="tab_5" class="tab">
+    <p>Some text about contact . . . </p>
+</div>
+</body>
+</html>

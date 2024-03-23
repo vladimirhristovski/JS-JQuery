@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L1Z2</title>
+  <script>
+    var number=prompt("Внеси мобилен број :");
+    var newNumber="0";
+    for (let i = 0; i < number.length; i++) {
+      newNumber=newNumber+number[i];
+      if(i===1){
+        newNumber=newNumber+"/";
+      }
+      if(i===4){
+        newNumber=newNumber+"-";
+      }
+    }
+    if(newNumber.startsWith("070")||newNumber.startsWith("071")||newNumber.startsWith("072")){
+      console.log(newNumber+" - T-mobile")
+    }
+    else if(newNumber.startsWith("075")||newNumber.startsWith("076")){
+      console.log(newNumber+" - One")
+    }
+    else if(newNumber.startsWith("077")||newNumber.startsWith("078")){
+      console.log(newNumber+" - Vip")
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function change(){
+      x=document.getElementById("demo")
+      x.innerHTML="Hello JavaScript!";
+      x.style.color="red";
+    }
+    function changeImage(){
+      element=document.getElementById("myimage")
+      if(element.src.match("bulbon")){
+        element.src="pic_bulboff.gif";
+      }else {
+        element.src="pic_bulbon.gif";
+      }
+    }
+    function myFunction(){
+       x=document.getElementById("num").value;
+      y=document.getElementById("valid");
+      var text;
+      if(isNaN(x)||x<1||x>10){
+        text="Input not valid";
+      }else {
+        text="Input OK";
+      }
+      y.innerHTML=text;
+    }
+  </script>
+</head>
+<body>
+<p id="demo">JavaScript can change the HTML content</p>
+<button onclick="change()">Click for change</button>
+<img id="myimage" src="pic_bulboff.gif" onclick="changeImage()" width="100" height="180"/>
+<p>Click the light bulb to turn on/off the light</p>
+<p>Please input a number between 1 and 10:</p>
+<input id="num" type="text">
+<button onclick="myFunction()">Submit</button>
+<p id="valid">text</p>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>L5Z2</title>
+    <style>
+
+    </style>
+    <script>
+        var random = Math.floor(Math.random() * (9999 - 1000) + 1000)
+        console.log(random)
+        var tries = 0
+        window.onload = function () {
+            var text = document.getElementById("obid")
+            var text2 = document.getElementById("prikaz")
+            var buttons = document.getElementsByTagName('button');
+            var guess = buttons[0]
+            var reset = buttons[1]
+            guess.onclick = function calculate() {
+                var guess = document.getElementById("guess").value
+                if (tries === 10) {
+                } else if (isNaN(guess) || guess < 1000 || guess > 9999) {
+                    alert("Внесовте погрешно!")
+                } else if (tries === 9) {
+                    tries++
+                    text.textContent = "Обиди " + tries
+                    text2.innerHTML += "Не успеавте да погодите од 10 обиди. Бројот е " + random
+                } else {
+                    tries++
+                    text.textContent = "Обиди " + tries
+                    if (tries === 10) {
+                        text.textContent = "Обиди " + tries
+                    } else {
+                        var randNum = Array.from(String(random), Number)
+                        var guessNum = Array.from(String(guess), Number)
+                        var right = 0
+                        var rightOnPlace = 0
+
+                        for (let i = 0; i < guessNum.length; i++) {
+                            if (guessNum[i] === randNum[i]) {
+                                rightOnPlace++
+                            }
+                        }
+
+                        for (let i = 0; i < guessNum.length; i++) {
+                            for (let j = 0; j < randNum.length; j++) {
+                                if (guessNum[i] === randNum[j]) {
+                                    right++
+                                    randNum[j] = ''
+                                    break
+                                }
+                            }
+                        }
+
+                        if (rightOnPlace === 4) {
+                            text2.innerHTML += "Има " + right + ", на место " + rightOnPlace + " " + guess + "<br>"
+                            text2.innerHTML += "ПОГОДОК!!!"
+                            tries = 10
+                            return
+                        }
+
+                        text2.innerHTML += "Има " + right + ", на место " + rightOnPlace + " " + guess + "<br>"
+
+                    }
+                }
+            }
+            reset.onclick = function calculate() {
+                random = Math.floor(Math.random() * (9999 - 1000) + 1000)
+                tries = 0
+                text.textContent = "Обиди " + tries
+                text2.textContent = ""
+                console.log(random)
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div style="text-align:right; float:left">
+        <label id="obid">Обиди 0</label>
+        <p>Погодок: <input id="guess" style="width:150px"/></p>
+        <button>Погоди</button>
+        <button>Од почеток</button>
+    </div>
+</div>
+<br/>
+<div id="prikaz" style="clear: both">
+</div>
+</body>
+</html>

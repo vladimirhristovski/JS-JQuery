@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .red{
+      color: red;
+    }
+  </style>
+  <script>
+
+    function highlight() {
+      var a=document.getElementsByTagName('strong')
+      console.log(a)
+      for (let i = 0; i < a.length; i++) {
+        a[i].classList.add('red')
+      }
+    }
+    function notH() {
+      var a=document.getElementsByTagName('strong')
+      console.log(a)
+      for (let i = 0; i < a.length; i++) {
+        a[i].classList.remove('red')
+      }
+    }
+    function getOptions() {
+      var l=document.getElementById("mySelect").length
+      console.log(l)
+    }
+  </script>
+</head>
+<body>
+<p>[<a href="#" onMouseOver="highlight()" onmouseout="notH()">On mouse over
+  here bold words of the following paragraph w
+  ill be highlighted</a>]</p>
+<p><strong>We</strong> have just started <strong>this</strong> section for the users (<strong>beginner</strong> to intermediate) who
+  <strong>want</strong> to work with <strong>
+    various</strong> JavaScript <strong>problems
+  </strong> and write scripts online to <strong>test</strong> their JavaScript <strong>ski
+    ll</strong>.</p>
+
+<select id="mySelect">
+  <option>Red</option>
+  <option>Green</option>
+  <option>Blue</option>
+  <option>White</option>
+</select>
+<input type="button" onclick="getOptions()" value="Count and Output all items">
+
+</body>
+</html>

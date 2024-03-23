@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>L1Z2</title>
+  <meta charset="UTF-8">
+  <style>
+    p{
+      display: inline-block;
+      width: 110px;
+      margin: 0;
+      padding-bottom: 13px;
+    }
+    form{
+      display: inline-block;
+    }
+  </style>
+  <script>
+    function genderEmpty() {
+      const gender = document.getElementsByClassName("gender");
+      let counter = 0;
+      for (let i = 0; i < gender.length; i++) {
+        if(gender[i].checked)
+          counter++;
+      }
+      return counter === gender.length;
+    }
+
+    function getGender(){
+      const gender = document.getElementsByClassName("gender");
+      for (let i = 0; i < gender.length; i++) {
+        if(gender[i].checked){
+          return gender[i].value;
+        }
+      }
+    }
+    function enroll(){
+      const name = document.getElementById("name").value;
+      let musicName = document.getElementById("musicName").value;
+      const gender = getGender();
+      const genre = document.getElementById("genre").value;
+      if(name==="" || musicName==="" || genderEmpty()){
+        alert("Сите полиња се задолжителни")
+      }else {
+        alert(name+", "+gender+", "+genre+" - успешно се пријавивте")
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>Форма за пријавување на X-Factor</h1>
+<p>Име</p>
+<input type="text" id="name">
+<br>
+<p>Уметничко име</p>
+<input type="text" id="musicName">
+<br>
+<p>Пол</p>
+<form>
+    <input type="radio" class="gender" name="gender" value="Машки"><label>Машки</label>
+    <input type="radio" class="gender" name="gender" value="Женски"><label>Женски</label>
+</form><br>
+
+<p>Жанр</p>
+<select id="genre">
+  <option>Classical Music</option>
+  <option>Rock</option>
+  <option>Turbofolk</option>
+  <option>Metal</option>
+  <option>Pop</option>
+  <option>Rap</option>
+</select>
+<br>
+<section>
+<button onclick="enroll()">Пријави се</button>
+</section>
+</body>
+</html>
