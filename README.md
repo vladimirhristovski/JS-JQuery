@@ -1,0 +1,1 @@
+JavaScript and JQuery exercises
